@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/*
+  Дизайн-токены — ВРЕМЕННЫЙ базовый набор (тёмная тема как согласованная
+  гипотеза). Полная система цветов/типографики придёт на этапе дизайна, когда
+  выберем визуальное направление. Значения-плейсхолдеры унаследованы от MAISON.
+
+  @theme порождает утилиты Tailwind: --color-bg → bg-bg/text-bg и т.д.
+*/
+@theme {
+  --color-bg: #101214;
+  --color-surface: #17191d;
+  --color-line: #2a2d31;
+  --color-fg: #f0ebe0;
+  --color-fg-dim: #b8b3a8;
+  --color-muted: #8b8e93;
+  --color-accent: #d4b483;
+}
+
+/*
+  @theme inline — семейства шрифтов ссылаются на CSS-переменные, которые
+  next/font выставляет на <html> (см. src/lib/fonts.ts). inline обязателен:
+  иначе Tailwind заинлайнит значение на этапе билда, когда переменной ещё нет.
+*/
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-cormorant);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,27 @@
+# Зависимости
+/node_modules
+/.pnp
+.pnp.*
+
+# Сборка Next.js и статический экспорт
+/.next/
+/out/
+/build
+next-env.d.ts
+
+# Отладка
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Окружение (секреты не коммитим)
+.env
+.env*.local
+
+# Служебное
+.DS_Store
+*.pem
+/.vercel
+
+# Визуальный компаньон брейншторма
+/.superpowers/
