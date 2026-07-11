@@ -32,7 +32,16 @@ export const cases: CaseStudy[] = [
   },
 ];
 
-/** Слаги для generateStaticParams шаблона /case/[slug] — только не-флагманы. */
-export const templateCaseSlugs = cases
-  .filter((c) => !c.flagship)
-  .map((c) => c.slug);
+/**
+ * Слаги, которые пре-рендерит шаблон /case/[slug].
+ *
+ * Флагман MAISON исключён — у него собственная страница /case/maison.
+ * Пока реальных не-флагманских кейсов нет, оставляем демо-слаг "example":
+ * динамический роут в output:'export' не собирается с нулём путей, а демо
+ * доказывает, что шаблон рендерится. На главной он НЕ показывается (там только
+ * `cases`). Заменить на реальные слаги, когда появятся кейсы.
+ */
+export const templateCaseSlugs: string[] = [
+  ...cases.filter((c) => !c.flagship).map((c) => c.slug),
+  "example",
+];
