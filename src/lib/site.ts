@@ -1,15 +1,77 @@
 /**
- * Контент-сийм сайта: страницы импортируют типизированные данные отсюда,
- * а не хардкодят их у себя. Заглушки на этапе скаффолда — наполнение придёт
- * на этапах контента и дизайна.
+ * Контент-сийм сайта: страницы и секции импортируют типизированные данные отсюда,
+ * а не хардкодят их у себя. Цены и услуги — из CLAUDE.md.
  */
 
 export const site = {
   name: "Кирилл",
   role: "Full-stack разработчик",
   // Telegram — основной канал связи и сквозной CTA.
-  telegram: "https://t.me/", // TODO: подставить реальный ник на этапе контента
+  // TODO: подставить реальный ник (сейчас плейсхолдер).
+  telegramUrl: "https://t.me/username",
+  telegramHandle: "@username",
+  // Локед-лейбл CTA — один и тот же в шапке, хиро и футере (без дубля интента).
+  ctaLabel: "Написать в Telegram",
 } as const;
+
+export type Service = {
+  title: string;
+  price: string;
+  description: string;
+  featured?: boolean;
+};
+
+export const services: Service[] = [
+  {
+    title: "Лендинг",
+    price: "от 12 000 ₽",
+    description:
+      "Одностраничный сайт под задачу: заявки, продажи, презентация. Вёрстка с нуля, адаптив, скорость.",
+  },
+  {
+    title: "Telegram-бот / Mini App",
+    price: "по ТЗ",
+    description:
+      "Боты для заявок, оплат и автоматизации. Mini App: полноценное приложение внутри Telegram.",
+  },
+  {
+    title: "Проектирование БД",
+    price: "от 8 000 ₽",
+    description:
+      "Схема данных под проект: PostgreSQL, связи, индексы, миграции. Чтобы не переделывать потом.",
+  },
+  {
+    title: "Комплексная разработка",
+    price: "от 45 000 ₽",
+    description:
+      "Сайт, бэкенд и бот вместе, под ключ. Один исполнитель на весь проект.",
+    featured: true,
+  },
+];
+
+export type ProcessStep = {
+  action: string;
+  detail: string;
+};
+
+export const processSteps: ProcessStep[] = [
+  {
+    action: "Обсуждаем задачу",
+    detail: "Созвон или переписка в Telegram. Фиксируем цель, объём и бюджет.",
+  },
+  {
+    action: "Согласую смету и сроки",
+    detail: "Что делаю, за сколько и к какой дате. Без сюрпризов в процессе.",
+  },
+  {
+    action: "Показываю по ходу",
+    detail: "Промежуточные версии, правки минимальными итерациями, а не в конце.",
+  },
+  {
+    action: "Сдаю и передаю",
+    detail: "Рабочий проект, доступы, короткая инструкция. Остаюсь на связи после сдачи.",
+  },
+];
 
 export type CaseStudy = {
   slug: string;
@@ -17,31 +79,54 @@ export type CaseStudy = {
   summary: string;
   /** Есть ли у кейса собственная страница-флагман (/case/<slug>), а не шаблон. */
   flagship: boolean;
+  /** Короткие честные факты о проекте (для превью). */
+  facts?: string[];
+  /** Карточка «скоро» — кейс в работе, страницы ещё нет. */
+  soon?: boolean;
 };
 
 /**
- * Список кейсов. MAISON — флагман с рукотворной страницей /case/maison.
- * Будущие кейсы (дашборд, API, Telegram-бот) поедут через шаблон /case/[slug].
+ * Кейсы. MAISON — флагман с рукотворной страницей /case/maison.
+ * Карточки «скоро» — направления, кейсы по которым ещё готовятся.
  */
 export const cases: CaseStudy[] = [
   {
     slug: "maison",
     title: "MAISON",
-    summary: "Лендинг премиального салона красоты — тёмная тема, Lighthouse 95+.",
+    summary: "Лендинг премиального салона красоты.",
     flagship: true,
+    facts: [
+      "Astro, тёмная тема",
+      "Self-hosted шрифты, ноль фронт-зависимостей",
+      "Форма заявки в Telegram",
+      "Lighthouse 95+ на мобильных",
+    ],
+  },
+  {
+    slug: "telegram-bot",
+    title: "Telegram-бот",
+    summary: "Приём заявок и автоматизация. Кейс готовится.",
+    flagship: false,
+    soon: true,
+  },
+  {
+    slug: "dashboard",
+    title: "Веб-приложение",
+    summary: "Панель с данными и авторизацией. Кейс готовится.",
+    flagship: false,
+    soon: true,
   },
 ];
 
+/** Кейсы для превью на главной. */
+export const flagshipCase = cases.find((c) => c.flagship)!;
+export const soonCases = cases.filter((c) => c.soon);
+
 /**
  * Слаги, которые пре-рендерит шаблон /case/[slug].
- *
  * Флагман MAISON исключён — у него собственная страница /case/maison.
- * Пока реальных не-флагманских кейсов нет, оставляем демо-слаг "example":
- * динамический роут в output:'export' не собирается с нулём путей, а демо
- * доказывает, что шаблон рендерится. На главной он НЕ показывается (там только
- * `cases`). Заменить на реальные слаги, когда появятся кейсы.
+ * Демо-слаг "example" оставляем, пока нет реальных не-флагманских кейсов с данными:
+ * динамический роут в output:'export' не собирается с нулём путей.
+ * Заменить на реальные слаги, когда появятся кейсы.
  */
-export const templateCaseSlugs: string[] = [
-  ...cases.filter((c) => !c.flagship).map((c) => c.slug),
-  "example",
-];
+export const templateCaseSlugs: string[] = ["example"];
