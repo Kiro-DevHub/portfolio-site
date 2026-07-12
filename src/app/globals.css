@@ -126,6 +126,19 @@ button,
   }
 }
 
+/* ── Хиро: построчный reveal из-под маски ──────────────────────────────── */
+/* Строка-маска: обрезает внутренний слой, который выезжает снизу вверх. */
+.hero-line {
+  display: block;
+  overflow: hidden;
+  /* Запас под нижние выносные (у, р), чтобы маска не подрезала глиф в покое. */
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.hero-line-inner {
+  display: block;
+}
+
 /* Единый видимый фокус для клавиатуры */
 :where(a, button, input, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--color-accent);
