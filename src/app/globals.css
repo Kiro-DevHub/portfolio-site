@@ -139,6 +139,16 @@ button,
   display: block;
 }
 
+/* ── Таймлайн процесса: подсветка активного узла ──────────────────────── */
+.timeline-node {
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+}
+.timeline-node.is-active {
+  border-color: var(--color-accent);
+  color: var(--color-accent-strong);
+  box-shadow: 0 0 24px -6px rgba(49, 208, 179, 0.5);
+}
+
 /* Единый видимый фокус для клавиатуры */
 :where(a, button, input, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--color-accent);
