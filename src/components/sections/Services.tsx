@@ -1,42 +1,66 @@
 import { Reveal } from "@/components/Reveal";
 import { services } from "@/lib/site";
 
-/** Услуги с ценами. Сетка 2×2 на десктопе, один столбец на мобилке. Цены — mono, tabular. */
+/**
+ * Услуги — широкие строки с огромной ценой справа (не сетка карточек).
+ * Якорь секции: крупные цены. Акцент: mono-нумерация, коралловый край и подъём
+ * поверхности на hover.
+ */
 export function Services() {
   return (
-    <section id="services" className="border-t border-line">
-      <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-28">
+    <section id="services" className="border-t border-hair">
+      <div className="mx-auto max-w-[1200px] px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
-          <h2 className="max-w-[18ch] text-3xl font-medium tracking-tight text-fg sm:text-4xl">
-            Что делаю и сколько это стоит
+          <h2 className="display-section text-fg">
+            Что делаю
+            <br />
+            <span className="weight-light text-fg-dim">и сколько стоит</span>
           </h2>
-          <p className="mt-4 max-w-[52ch] text-fg-dim">
+          <p className="mt-6 max-w-[52ch] text-lg text-fg-dim">
             Цены стартовые, финальная зависит от объёма. Точную смету называю
             после обсуждения задачи.
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
+        <div className="mt-16">
           {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 60}>
-              <article
-                className={`flex h-full flex-col gap-3 p-6 sm:p-8 ${
-                  service.featured ? "bg-surface-2" : "bg-surface"
-                }`}
-              >
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="min-w-0 text-lg font-medium text-fg">{service.title}</h3>
-                  {service.featured && (
-                    <span className="shrink-0 rounded-sm border border-accent/40 px-2 py-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">
-                      под ключ
+              <div className="group relative border-t border-hair transition-colors duration-200 last:border-b hover:bg-surface/50">
+                {/* Коралловый край, выезжает на hover */}
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-300 group-hover:scale-y-100"
+                />
+                <div className="grid grid-cols-12 items-baseline gap-x-4 gap-y-3 py-8 sm:py-10">
+                  <span className="col-span-2 font-mono text-sm text-accent lg:col-span-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="col-span-10 lg:col-span-7">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="text-xl font-medium text-fg sm:text-2xl">
+                        {service.title}
+                      </h3>
+                      {service.featured && (
+                        <span className="rounded-sm border border-accent/40 px-2 py-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">
+                          под ключ
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-2 max-w-[52ch] text-fg-dim">
+                      {service.description}
+                    </p>
+                  </div>
+                  <div className="col-span-12 lg:col-span-4 lg:text-right">
+                    <span
+                      className={`price-xl ${
+                        service.featured ? "text-accent" : "text-fg"
+                      }`}
+                    >
+                      {service.price}
                     </span>
-                  )}
+                  </div>
                 </div>
-                <p className="tnum font-mono text-xl text-accent">{service.price}</p>
-                <p className="mt-1 text-sm leading-relaxed text-fg-dim">
-                  {service.description}
-                </p>
-              </article>
+              </div>
             </Reveal>
           ))}
         </div>
