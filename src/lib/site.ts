@@ -97,7 +97,7 @@ export const skillGroups: SkillGroup[] = [
     label: "Frontend",
     items: [
       "React / Next.js — Hooks, Router, Context, SSG",
-      "TypeScript, строгий режим",
+      "TypeScript — строгий режим, типы, интерфейсы",
       "Tailwind CSS, Astro",
       "Адаптив, доступность, семантика",
     ],
@@ -105,28 +105,31 @@ export const skillGroups: SkillGroup[] = [
   {
     label: "Backend",
     items: [
-      "Node.js",
-      "Python, aiogram",
-      "REST API, интеграции",
+      "Node.js — npm, event loop, переменные окружения",
+      "Python — aiogram, ООП, async",
+      "Django — Models, Views, Auth, DRF",
+      "C# / ASP.NET Core — Web API, MVC, Auth, DI",
       "Telegram Bot API",
     ],
   },
   {
     label: "БД и инфраструктура",
     items: [
-      "PostgreSQL: схема, связи, индексы",
-      "Проектирование данных, миграции",
-      "Cloudflare Pages",
-      "Деплой, статический экспорт",
+      "PostgreSQL — продакшн-опыт: схема, триггеры, роли, pg_dump",
+      "MySQL — JOIN, индексы, транзакции",
+      "Docker — Dockerfile, Compose, volumes",
+      "CI/CD — GitHub Actions",
+      "Cloudflare Pages, статический экспорт",
     ],
   },
   {
     label: "Инструменты",
     items: [
-      "Git",
-      "Figma → вёрстка",
-      "Lighthouse, оптимизация",
-      "ESLint, code review",
+      "Git / GitHub — ветвление, pull requests, code review",
+      "Linux — файловая система, права, systemctl, SSH",
+      "Bash — скрипты автоматизации",
+      "Selenium — UI-тесты, Page Object",
+      "Lighthouse, ESLint",
     ],
   },
 ];
