@@ -1,10 +1,11 @@
 import { Reveal } from "@/components/Reveal";
+import { CountUpPrice } from "@/components/motion/CountUpPrice";
 import { services } from "@/lib/site";
 
 /**
  * Услуги — широкие строки с огромной ценой справа (не сетка карточек).
- * Якорь секции: крупные цены. Акцент: mono-нумерация, коралловый край и подъём
- * поверхности на hover.
+ * Якорь секции: крупные цены (набегают count-up при входе в кадр). Акцент:
+ * mono-нумерация, мятный край и подъём поверхности на hover.
  */
 export function Services() {
   return (
@@ -26,7 +27,7 @@ export function Services() {
           {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 60}>
               <div className="group relative border-t border-hair transition-colors duration-200 last:border-b hover:bg-surface/50">
-                {/* Коралловый край, выезжает на hover */}
+                {/* Мятный край, выезжает на hover */}
                 <span
                   aria-hidden="true"
                   className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-300 group-hover:scale-y-100"
@@ -51,13 +52,12 @@ export function Services() {
                     </p>
                   </div>
                   <div className="col-span-12 lg:col-span-4 lg:text-right">
-                    <span
+                    <CountUpPrice
+                      value={service.price}
                       className={`price-xl ${
                         service.featured ? "text-accent" : "text-fg"
                       }`}
-                    >
-                      {service.price}
-                    </span>
+                    />
                   </div>
                 </div>
               </div>
