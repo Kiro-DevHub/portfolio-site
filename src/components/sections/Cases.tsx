@@ -38,7 +38,7 @@ export function Cases() {
                     className="absolute inset-0"
                     style={{
                       background:
-                        "radial-gradient(120% 90% at 30% 15%, rgba(255,106,69,0.16), transparent 58%)",
+                        "radial-gradient(120% 90% at 30% 15%, rgba(49,208,179,0.14), transparent 58%)",
                     }}
                   />
                   <span className="relative text-4xl tracking-[0.18em] text-fg sm:text-6xl">

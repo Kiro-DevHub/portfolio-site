@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0c0e",
+  themeColor: "#0b1018",
 };
 
 // Ставит .js на <html> до первой отрисовки: reveal-анимация прячет контент только
