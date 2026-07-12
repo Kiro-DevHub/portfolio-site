@@ -63,6 +63,74 @@ export const services: Service[] = [
   },
 ];
 
+/**
+ * Секция «Обо мне». Текст и факт-плашки согласованы с CLAUDE.md
+ * (позиционирование Full-stack, без заявлений об уровне/сеньорности).
+ */
+export const about = {
+  paragraph:
+    'Full-stack разработчик, 2 года практики: реальные задачи на действующих предприятиях плюс собственные проекты, которые довожу до рабочего состояния, а не до "почти готово". Завершил обучение по направлению "Разработка веб и мультимедийных приложений". Беру задачу целиком: интерфейс, серверная логика, база данных, деплой.',
+  facts: [
+    { label: "Опыт", value: "2 года разработки" },
+    { label: "Формат", value: "весь проект один: фронт, бэк, БД, деплой" },
+    {
+      label: "Образование",
+      value: "Разработка веб и мультимедийных приложений",
+    },
+  ],
+} as const;
+
+export type SkillGroup = {
+  /** Моно-лейбл колонки. */
+  label: string;
+  /** Строки навыков; первая — ключевая (рендерится ярче). */
+  items: string[];
+};
+
+/**
+ * Навыки — 4 колонки. Строка React оформлена по правилу CLAUDE.md
+ * («React / Next.js — Hooks, Router, Context, SSG», сам сайт — пруф).
+ * Только реальный стек проекта, без выпячивания Tailwind как отдельного пункта.
+ */
+export const skillGroups: SkillGroup[] = [
+  {
+    label: "Frontend",
+    items: [
+      "React / Next.js — Hooks, Router, Context, SSG",
+      "TypeScript, строгий режим",
+      "Tailwind CSS, Astro",
+      "Адаптив, доступность, семантика",
+    ],
+  },
+  {
+    label: "Backend",
+    items: [
+      "Node.js",
+      "Python, aiogram",
+      "REST API, интеграции",
+      "Telegram Bot API",
+    ],
+  },
+  {
+    label: "БД и инфраструктура",
+    items: [
+      "PostgreSQL: схема, связи, индексы",
+      "Проектирование данных, миграции",
+      "Cloudflare Pages",
+      "Деплой, статический экспорт",
+    ],
+  },
+  {
+    label: "Инструменты",
+    items: [
+      "Git",
+      "Figma → вёрстка",
+      "Lighthouse, оптимизация",
+      "ESLint, code review",
+    ],
+  },
+];
+
 export type ProcessStep = {
   action: string;
   detail: string;
