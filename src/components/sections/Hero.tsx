@@ -94,10 +94,12 @@ export function Hero() {
               <span className="hero-line-inner">Не шаблон,</span>
             </span>
             <span className="hero-line">
-              <span className="hero-line-inner">
-                <span className="weight-light text-fg-dim">а сайт под</span> вашу
-                задачу
+              <span className="hero-line-inner weight-light text-fg-dim">
+                а сайт под
               </span>
+            </span>
+            <span className="hero-line">
+              <span className="hero-line-inner">вашу задачу</span>
             </span>
           </h1>
           <p className="hero-sub mt-7 max-w-[48ch] text-lg leading-relaxed text-fg-dim">

@@ -60,22 +60,26 @@ body {
 }
 
 /* ── Типографика: резкая шкала ─────────────────────────────────────────── */
-/* Заголовки-display набраны Unbounded. Он широкий, поэтому трекинг чуть
-   отпущен против исходного, чтобы не «слипался» на крупном кегле. */
+/* Заголовки-display набраны Unbounded — гарнитура широкая и жирная, поэтому на
+   крупном кегле её ОБЯЗАТЕЛЬНО поджимать: отрицательный трекинг собирает строку,
+   низкий интерлиньяж (1.05–1.08) сшивает многострочный заголовок в единый блок.
+   ПРАВИЛО: Unbounded применяется только на дисплейном кегле (≥28px). Мелкие
+   заголовки и подзаголовки — основной гротеск Golos (.t-h3), Unbounded там
+   разваливается на буквы. */
 .display-hero {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 7vw, 5.5rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.02;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
   text-wrap: balance;
 }
 .display-section {
   font-family: var(--font-display);
   font-size: clamp(2.15rem, 5vw, 3.85rem);
   font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.05;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
   text-wrap: balance;
 }
 /* Лёгкий вес для контраста внутри крупных заголовков */
