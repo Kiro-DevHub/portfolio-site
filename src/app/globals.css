@@ -153,6 +153,35 @@ button,
   }
 }
 
+/* ── Точка «на связи»: мягкая пульсация ───────────────────────────────── */
+.online-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+}
+.online-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-accent);
+  animation: online-pulse 2.4s ease-out infinite;
+}
+@keyframes online-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
 /* ── Таймлайн процесса: подсветка активного узла ──────────────────────── */
 .timeline-node {
   transition: border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;

@@ -22,12 +22,18 @@ export function SiteFooter() {
           </div>
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-2 border-t border-line pt-8 font-mono text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 font-mono text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <span>
             {site.name}
             <span className="text-accent">.</span>dev, {site.role}
           </span>
-          <span>© {year}</span>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-2 text-fg-dim">
+              <span className="online-dot" aria-hidden="true" />
+              на связи
+            </span>
+            <span>© {year}</span>
+          </div>
         </div>
       </div>
     </footer>
