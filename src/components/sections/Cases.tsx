@@ -18,9 +18,14 @@ export function Cases() {
         {/* Флагман MAISON */}
         <Reveal delay={80}>
           <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
-            {/* Рамка браузера со слотом под скриншот */}
-            <div className="lg:col-span-7">
-              <div className="raise overflow-hidden rounded-lg border border-hair bg-surface">
+            {/* Рамка браузера-ссылка со слотом под скриншот. Hover [5]: подъём 4px,
+                акцентная граница, скриншот внутри рамки увеличивается до 1.02. */}
+            <Link
+              href={`/case/${flagshipCase.slug}`}
+              aria-label={`Открыть кейс ${flagshipCase.title}`}
+              className="group block lg:col-span-7"
+            >
+              <div className="raise overflow-hidden rounded-lg border border-hair bg-surface transition-[transform,border-color] duration-300 group-hover:-translate-y-1 group-hover:border-accent/60">
                 <div className="flex items-center gap-3 border-b border-hair px-4 py-3">
                   <span className="flex gap-1.5" aria-hidden="true">
                     <span className="size-2.5 rounded-full bg-surface-2" />
@@ -31,22 +36,25 @@ export function Cases() {
                     <span aria-hidden="true">▲</span> maison
                   </span>
                 </div>
-                {/* Слот под реальный скриншот (пока брендовое key-art) */}
-                <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-surface-2">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(120% 90% at 30% 15%, rgba(49,208,179,0.14), transparent 58%)",
-                    }}
-                  />
-                  <span className="relative text-4xl tracking-[0.18em] text-fg sm:text-6xl">
-                    MAISON
-                  </span>
+                {/* Слот под реальный скриншот (пока брендовое key-art). Клип-рамка:
+                    внутренний слой масштабируется на hover, overflow обрезает. */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
+                  <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "radial-gradient(120% 90% at 30% 15%, rgba(49,208,179,0.14), transparent 58%)",
+                      }}
+                    />
+                    <span className="relative text-4xl tracking-[0.18em] text-fg sm:text-6xl">
+                      MAISON
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Описание */}
             <div className="flex flex-col gap-6 lg:col-span-5">

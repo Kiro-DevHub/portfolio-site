@@ -149,6 +149,20 @@ button,
   box-shadow: 0 0 24px -6px rgba(49, 208, 179, 0.5);
 }
 
+/* ── Уважение prefers-reduced-motion: гасим CSS-анимации/переходы ──────────
+   Страховка для всех CSS-эффектов (hover, marquee, пульс). GSAP-компоненты
+   проверяют reduced-motion отдельно и отключают анимацию сами. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Единый видимый фокус для клавиатуры */
 :where(a, button, input, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--color-accent);
