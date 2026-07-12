@@ -14,6 +14,20 @@ export const site = {
   ctaLabel: "Написать в Telegram",
 } as const;
 
+/** Технологии для бегущей строки между кейсами и процессом — реальный стек. */
+export const technologies: string[] = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Astro",
+  "Tailwind CSS",
+  "PostgreSQL",
+  "Node.js",
+  "aiogram",
+  "Telegram Bot API",
+  "Cloudflare Pages",
+];
+
 export type Service = {
   title: string;
   price: string;

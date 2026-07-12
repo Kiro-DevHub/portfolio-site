@@ -139,6 +139,20 @@ button,
   display: block;
 }
 
+/* ── Marquee технологий: бесшовная петля, пауза на hover ──────────────── */
+.marquee-track {
+  animation: marquee-scroll 34s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  to {
+    /* Ровно одна копия списка = половина трека → бесшовно. */
+    transform: translateX(-50%);
+  }
+}
+
 /* ── Таймлайн процесса: подсветка активного узла ──────────────────────── */
 .timeline-node {
   transition: border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
