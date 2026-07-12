@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { Magnetic } from "@/components/motion/Magnetic";
 
 // Официальный бренд-знак Telegram (Simple Icons). Не декоративный SVG — логотип.
 function TelegramGlyph({ className }: { className?: string }) {
@@ -32,14 +33,16 @@ export function TelegramButton({ variant = "primary", className = "" }: Props) {
       : "border border-line text-fg hover:border-accent/60 hover:text-accent";
 
   return (
-    <a
-      href={site.telegramUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`${base} ${styles} ${className}`}
-    >
-      <TelegramGlyph className="size-[18px]" />
-      {site.ctaLabel}
-    </a>
+    <Magnetic>
+      <a
+        href={site.telegramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${base} ${styles} ${className}`}
+      >
+        <TelegramGlyph className="size-[18px]" />
+        {site.ctaLabel}
+      </a>
+    </Magnetic>
   );
 }
