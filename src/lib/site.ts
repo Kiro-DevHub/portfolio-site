@@ -97,7 +97,7 @@ export const skillGroups: SkillGroup[] = [
     label: "Frontend",
     items: [
       "React / Next.js — Hooks, Router, Context, SSG",
-      "TypeScript — строгий режим, типы, интерфейсы",
+      "TypeScript — строгий режим, типы, интерфейсы, generics",
       "Tailwind CSS, Astro",
       "Адаптив, доступность, семантика",
     ],
