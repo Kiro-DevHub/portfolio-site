@@ -1,19 +1,37 @@
-import { Manrope } from "next/font/google";
+import localFont from "next/font/local";
 
 /**
- * Единственный сийм для шрифтов сайта.
+ * Единственный сийм для шрифтов сайта. Пара: Unbounded (заголовки) × Golos Text
+ * (тело). Оба self-hosted через next/font/local — woff2 лежат рядом, в рантайме
+ * запросов к CDN нет (разрешено CLAUDE.md).
  *
- * Manrope как переменный шрифт через next/font/google: Next скачивает и
- * САМОХОСТИТ его на этапе билда (сабсет latin+cyrillic), в рантайме запросов к
- * Google Fonts CDN нет — это разрешено CLAUDE.md. Переменная ось даёт весь
- * диапазон весов (нужен контраст 300 ↔ 700/800), роль --font-sans задаёт тема.
+ * Начертания сведены к нужным: display 300 + 600, body 400 + 500. Каждый файл
+ * несёт полную кириллицу И латиницу (сабсет latin+cyrillic, инстансированный
+ * вес), поэтому латинские вставки (Telegram, React, PostgreSQL) не проваливаются
+ * в системный фолбэк. Роли --font-sans / --font-display выставляет тема.
  */
-export const fontSans = Manrope({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-manrope",
+
+/** Тело — Golos Text: 400 (обычный) и 500 (medium). */
+export const fontBody = localFont({
+  src: [
+    { path: "./fonts/golos-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/golos-500.woff2", weight: "500", style: "normal" },
+  ],
+  variable: "--font-golos",
   display: "swap",
   fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
 });
 
-/** Классы для <html> — подключают переменную гарнитуры. */
-export const fontVariables = fontSans.variable;
+/** Заголовки — Unbounded: 300 (лёгкий контраст) и 600 (основной вес display). */
+export const fontDisplay = localFont({
+  src: [
+    { path: "./fonts/unbounded-300.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/unbounded-600.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-unbounded",
+  display: "swap",
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+});
+
+/** Классы для <html> — подключают обе переменные гарнитур. */
+export const fontVariables = `${fontBody.variable} ${fontDisplay.variable}`;
