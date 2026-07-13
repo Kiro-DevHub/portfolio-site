@@ -49,6 +49,13 @@
 
 html {
   color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+/* Плавный скролл по внутренним якорям + сдвиг цели из-под липкой шапки (h-16).
+   reduced-motion гасит плавность в reset ниже. */
+:where(section, footer)[id] {
+  scroll-margin-top: 5rem;
 }
 
 body {

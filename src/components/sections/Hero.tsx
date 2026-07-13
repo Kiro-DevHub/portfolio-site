@@ -4,11 +4,12 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { TelegramButton } from "@/components/TelegramButton";
 
-/** Слои full-stack как композиционный якорь справа: линии, типографика, глубина, акцент. */
+/** Слои full-stack как композиционный якорь справа: линии, типографика, глубина, акцент.
+    desc раскрывается на hover/фокусе, клик по карточке ведёт к секции услуг. */
 const layers = [
-  { n: "01", label: "Интерфейс" },
-  { n: "02", label: "Логика" },
-  { n: "03", label: "Данные" },
+  { n: "01", label: "Интерфейс", desc: "React, адаптив, скорость" },
+  { n: "02", label: "Логика", desc: "Node.js, Python, боты" },
+  { n: "03", label: "Данные", desc: "PostgreSQL, схемы, миграции" },
 ];
 
 // useLayoutEffect на клиенте (прячем стартовые состояния до пейнта — без FOUC),
@@ -120,11 +121,16 @@ export function Hero() {
 
         {/* Композиционный якорь: слои */}
         <div className="hero-anchor hidden lg:col-span-5 lg:block">
-          <div className="relative mx-auto h-[360px] w-full max-w-[380px]">
+          {/* Ширина карточки = 100% − 56px, а нижние сдвинуты на +28/+56px вправо:
+              правый край самой смещённой («Данные») ровно совпадает с контейнером —
+              больше не обрезается краем секции. */}
+          <div className="relative mx-auto h-[360px] w-full max-w-[400px]">
             {layers.map((layer, i) => (
-              <div
+              <a
                 key={layer.n}
-                className={`raise absolute left-0 right-0 flex items-center justify-between rounded-lg border bg-surface/80 px-5 py-4 backdrop-blur-sm ${
+                href="#services"
+                aria-label={`${layer.label}: ${layer.desc}. Перейти к услугам`}
+                className={`group raise absolute left-0 block w-[calc(100%-56px)] rounded-lg border bg-surface/80 px-5 py-4 backdrop-blur-sm transition-colors duration-300 hover:border-accent/50 focus-visible:border-accent/50 ${
                   i === 0
                     ? "border-l-2 border-l-accent border-y-hair border-r-hair glow-accent"
                     : "border-hair"
@@ -135,11 +141,21 @@ export function Hero() {
                   zIndex: layers.length - i,
                 }}
               >
-                <span className="text-base font-medium text-fg">
-                  {layer.label}
-                </span>
-                <span className="font-mono text-sm text-accent">{layer.n}</span>
-              </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-medium text-fg">
+                    {layer.label}
+                  </span>
+                  <span className="font-mono text-sm text-accent">
+                    {layer.n}
+                  </span>
+                </div>
+                {/* Строка описания: grid-rows 0fr→1fr плавно раскрывает высоту */}
+                <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr]">
+                  <div className="overflow-hidden">
+                    <p className="t-small mt-2 text-fg-dim">{layer.desc}</p>
+                  </div>
+                </div>
+              </a>
             ))}
           </div>
         </div>
