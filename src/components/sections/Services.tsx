@@ -17,7 +17,7 @@ export function Services() {
             <br />
             <span className="weight-light text-fg-dim">и сколько стоит</span>
           </h2>
-          <p className="mt-6 max-w-[52ch] text-lg text-fg-dim">
+          <p className="t-body mt-6 max-w-[52ch] text-fg-dim">
             Цены стартовые, финальная зависит от объёма. Точную смету называю
             после обсуждения задачи.
           </p>
@@ -47,7 +47,7 @@ export function Services() {
                         </span>
                       )}
                     </div>
-                    <p className="mt-2 max-w-[52ch] text-fg-dim">
+                    <p className="t-body mt-2 max-w-[52ch] text-fg-dim">
                       {service.description}
                     </p>
                   </div>

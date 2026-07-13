@@ -102,7 +102,7 @@ export function Hero() {
               <span className="hero-line-inner">вашу задачу</span>
             </span>
           </h1>
-          <p className="hero-sub mt-7 max-w-[48ch] text-lg leading-relaxed text-fg-dim">
+          <p className="hero-sub t-body mt-7 max-w-[48ch] text-fg-dim">
             Сайты, Telegram-боты и базы данных под задачу бизнеса. Один
             исполнитель на весь проект, без конструкторов и готовых тем.
           </p>

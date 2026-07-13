@@ -17,9 +17,7 @@ export function About() {
         <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           {/* Текст */}
           <Reveal delay={80} className="lg:col-span-7">
-            <p className="max-w-[54ch] text-xl leading-relaxed text-fg-dim sm:text-2xl">
-              {about.paragraph}
-            </p>
+            <p className="measure t-body text-fg-dim">{about.paragraph}</p>
           </Reveal>
 
           {/* Слот под портрет. Точные размеры: 4:5, исходник 800×1000 (2× от

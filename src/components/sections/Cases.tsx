@@ -65,7 +65,7 @@ export function Cases() {
                 <h3 className="mt-3 text-3xl font-medium text-fg">
                   {flagshipCase.title}
                 </h3>
-                <p className="mt-3 text-lg text-fg-dim">{flagshipCase.summary}</p>
+                <p className="t-body mt-3 text-fg-dim">{flagshipCase.summary}</p>
               </div>
 
               {/* Тег Lighthouse — 4 метрики */}
@@ -127,7 +127,7 @@ export function Cases() {
                     скоро
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed text-fg-dim">{c.summary}</p>
+                <p className="t-small text-fg-dim">{c.summary}</p>
               </article>
             </Reveal>
           ))}
