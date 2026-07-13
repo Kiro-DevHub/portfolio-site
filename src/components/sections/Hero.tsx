@@ -90,7 +90,7 @@ export function Hero() {
           <p className="hero-eyebrow t-label text-muted">
             Full-stack разработчик
           </p>
-          <h1 className="display-hero mt-6 text-fg">
+          <h1 className="display-hero hero-h1 mt-6 text-fg">
             <span className="hero-line">
               <span className="hero-line-inner">Не шаблон,</span>
             </span>

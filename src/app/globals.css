@@ -81,6 +81,13 @@ body {
   line-height: 1.05;
   text-wrap: balance;
 }
+/* Хиро-заголовок набран по трём заданным переносам («Не шаблон,» / «а сайт
+   под» / «вашу задачу») — на потолке 5.5rem самая длинная строка переносится
+   внутри себя (4 визуальные строки вместо 3). Свой потолок ниже, ограничивает
+   только хиро — .display-hero в футере (короче) не трогаем. */
+.display-hero.hero-h1 {
+  font-size: clamp(2.75rem, 7vw, 4.75rem);
+}
 .display-section {
   font-family: var(--font-display);
   font-size: clamp(2.15rem, 5vw, 3.85rem);
