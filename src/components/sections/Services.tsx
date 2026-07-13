@@ -23,7 +23,7 @@ export function Services() {
           </p>
         </Reveal>
 
-        <div className="mt-16">
+        <div className="dim-siblings mt-16">
           {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 60}>
               <div className="group relative border-t border-hair transition-colors duration-200 last:border-b hover:bg-surface/50">

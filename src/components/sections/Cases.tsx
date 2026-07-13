@@ -111,7 +111,7 @@ export function Cases() {
         </Reveal>
 
         {/* Карточки «скоро» */}
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+        <div className="dim-siblings mt-8 grid gap-6 sm:grid-cols-2">
           {soonCases.map((c, i) => (
             <Reveal key={c.slug} delay={i * 60}>
               <article className="raise flex h-full flex-col gap-3 rounded-lg border border-dashed border-hair-strong bg-surface/50 p-6">
