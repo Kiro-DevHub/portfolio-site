@@ -17,6 +17,8 @@ function TelegramGlyph({ className }: { className?: string }) {
 
 type Props = {
   variant?: "primary" | "ghost";
+  /** lg — крупный вариант для финального CTA-экрана. */
+  size?: "md" | "lg";
   className?: string;
 };
 
@@ -24,9 +26,17 @@ type Props = {
  * Сквозной CTA в Telegram. Лейбл один и тот же везде (site.ctaLabel) — без дубля
  * интента. Высота ≥44px (тач), видимый фокус — из globals.css.
  */
-export function TelegramButton({ variant = "primary", className = "" }: Props) {
+export function TelegramButton({
+  variant = "primary",
+  size = "md",
+  className = "",
+}: Props) {
   const base =
-    "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 text-[15px] font-medium transition-colors duration-200 active:translate-y-px";
+    "inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 active:translate-y-px";
+  const sizing =
+    size === "lg"
+      ? "min-h-14 gap-2.5 px-7 text-base"
+      : "min-h-11 gap-2 px-5 text-[15px]";
   const styles =
     variant === "primary"
       ? "bg-accent text-accent-fg hover:bg-accent-strong"
@@ -38,9 +48,9 @@ export function TelegramButton({ variant = "primary", className = "" }: Props) {
         href={site.telegramUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${base} ${styles} ${className}`}
+        className={`${base} ${sizing} ${styles} ${className}`}
       >
-        <TelegramGlyph className="size-[18px]" />
+        <TelegramGlyph className={size === "lg" ? "size-5" : "size-[18px]"} />
         {site.ctaLabel}
       </a>
     </Magnetic>

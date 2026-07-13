@@ -8,17 +8,17 @@ export function SiteFooter() {
 
   return (
     <footer id="contact" className="border-t border-line">
-      <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-[1200px] px-5 py-28 sm:px-8 sm:py-36">
+        {/* Последний экран заказчика — бьёт в полную силу: заголовок уровня хиро
+            (Unbounded), на всю ширину, крупная кнопка со свечением акцента. */}
         <Reveal>
-          <h2 className="max-w-[18ch] text-3xl font-medium tracking-tight text-fg sm:text-4xl">
-            Расскажите про задачу
-          </h2>
-          <p className="mt-4 max-w-[52ch] text-fg-dim">
+          <h2 className="display-hero text-fg">Расскажите про задачу</h2>
+          <p className="t-body mt-6 max-w-[52ch] text-fg-dim">
             Отвечу в Telegram, задам пару вопросов и назову смету со сроками.
             Обсудить идею ни к чему не обязывает.
           </p>
-          <div className="mt-8">
-            <TelegramButton />
+          <div className="mt-10">
+            <TelegramButton size="lg" className="glow-accent" />
           </div>
         </Reveal>
 
