@@ -24,7 +24,10 @@ export function About() {
           {/* Карточка-терминал вместо фото-слота: те же токены, что и рамка
               браузера в кейсах (три точки, моно-регистр), свечение уровня
               остальных карточек секции. Без анимации печати — статичный
-              ответ читается быстрее и не выглядит дёшево. */}
+              ответ читается быстрее и не выглядит дёшево. Содержимое — паспорт
+              самого сайта (стек, сборка, зависимости), а не дубль футера/
+              навыков. "lighthouse" закомментирован в выводе, пока нет
+              реального прогона на прод-билде. */}
           <Reveal delay={140} className="lg:col-span-5">
             <div className="raise relative w-full max-w-[400px] overflow-hidden rounded-lg border border-hair bg-surface lg:ml-auto">
               <div
@@ -43,18 +46,44 @@ export function About() {
                   ~/kirill
                 </span>
               </div>
-              <div className="relative flex flex-col gap-3 px-5 py-6 font-mono text-sm">
-                <p className="text-fg-dim">
-                  <span className="text-accent">$</span> whoami
-                </p>
-                <p className="text-fg">
-                  Кирилл — full-stack разработчик
-                </p>
-                <p className="text-fg-dim">Ростов-на-Дону · МСК</p>
-                <p className="mt-2 flex items-center gap-2 text-fg-dim">
-                  <span className="online-dot" aria-hidden="true" />
-                  на связи
-                </p>
+              <div className="relative flex flex-col gap-4 px-5 py-6 font-mono text-xs">
+                <div>
+                  <p className="text-fg-dim">
+                    <span className="text-accent">$</span> whoami
+                  </p>
+                  <p className="mt-1 text-fg">
+                    Кирилл — full-stack, Ростов-на-Дону
+                  </p>
+                </div>
+                <div>
+                  <p className="text-fg-dim">
+                    <span className="text-accent">$</span> cat this-site.json
+                  </p>
+                  <div className="mt-1 text-muted">{"{"}</div>
+                  <div className="pl-4">
+                    <span className="text-accent">&quot;stack&quot;</span>
+                    <span className="text-muted">: </span>
+                    <span className="text-fg">
+                      &quot;Next.js 15 · TypeScript · Tailwind&quot;
+                    </span>
+                    <span className="text-muted">,</span>
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-accent">&quot;build&quot;</span>
+                    <span className="text-muted">: </span>
+                    <span className="text-fg">&quot;static export&quot;</span>
+                    <span className="text-muted">,</span>
+                  </div>
+                  <div className="pl-4 text-muted">
+                    {'// "lighthouse": "100 / 100 / 100 / 100",'}
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-accent">&quot;deps&quot;</span>
+                    <span className="text-muted">: </span>
+                    <span className="text-fg">0</span>
+                  </div>
+                  <div className="text-muted">{"}"}</div>
+                </div>
               </div>
             </div>
           </Reveal>
