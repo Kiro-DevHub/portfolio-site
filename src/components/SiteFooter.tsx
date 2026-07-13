@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { SectionPath } from "@/components/SectionPath";
 import { site } from "@/lib/site";
 import { TelegramButton } from "@/components/TelegramButton";
 import { LocalTime } from "@/components/LocalTime";
@@ -13,13 +14,14 @@ export function SiteFooter() {
         {/* Последний экран заказчика — бьёт в полную силу: заголовок уровня хиро
             (Unbounded), на всю ширину, крупная кнопка со свечением акцента. */}
         <Reveal>
+          <SectionPath path="~/contact" />
           <h2 className="display-hero text-fg">Расскажите про задачу</h2>
           <p className="t-body mt-6 max-w-[52ch] text-fg-dim">
             Отвечу в Telegram, задам пару вопросов и назову смету со сроками.
             Обсудить идею ни к чему не обязывает.
           </p>
           <div className="mt-10">
-            <TelegramButton size="lg" className="glow-accent" />
+            <TelegramButton size="lg" swapLabel className="glow-accent" />
           </div>
         </Reveal>
 
