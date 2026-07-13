@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
+import { SectionPath } from "@/components/SectionPath";
 import { flagshipCase, soonCases } from "@/lib/site";
 
 /**
@@ -14,6 +15,7 @@ export function Cases() {
     <section id="cases" className="border-t border-hair">
       <div className="mx-auto max-w-[1200px] px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
+          <SectionPath path="~/cases" />
           <h2 className="display-section text-fg">Кейсы</h2>
         </Reveal>
 

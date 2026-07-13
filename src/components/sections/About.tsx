@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { SectionPath } from "@/components/SectionPath";
 import { about } from "@/lib/site";
 
 /**
@@ -12,6 +13,7 @@ export function About() {
     <section id="about" className="border-t border-hair">
       <div className="mx-auto max-w-[1200px] px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
+          <SectionPath path="~/about" />
           <h2 className="display-section text-fg">Обо мне</h2>
         </Reveal>
 

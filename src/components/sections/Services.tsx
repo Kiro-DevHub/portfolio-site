@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { SectionPath } from "@/components/SectionPath";
 import { CountUpPrice } from "@/components/motion/CountUpPrice";
 import { services } from "@/lib/site";
 
@@ -14,6 +15,7 @@ export function Services() {
     <section id="services" className="border-t border-hair">
       <div className="mx-auto max-w-[1200px] px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
+          <SectionPath path="~/services" />
           <h2 className="display-section text-fg">
             Что делаю
             <br />

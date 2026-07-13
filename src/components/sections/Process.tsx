@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { SectionPath } from "@/components/SectionPath";
 import { ProcessTimeline } from "@/components/motion/ProcessTimeline";
 import { processSteps } from "@/lib/site";
 
@@ -12,6 +13,7 @@ export function Process() {
     <section id="process" className="border-t border-hair">
       <div className="mx-auto max-w-[1200px] px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
+          <SectionPath path="~/process" />
           <h2 className="display-section text-fg">
             Как проходит
             <br />
