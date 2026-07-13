@@ -100,7 +100,9 @@ export function Hero() {
               </span>
             </span>
             <span className="hero-line">
-              <span className="hero-line-inner">вашу задачу</span>
+              <span className="hero-line-inner">
+                вашу задачу<span className="hero-caret" aria-hidden="true">_</span>
+              </span>
             </span>
           </h1>
           <p className="hero-sub t-body mt-7 max-w-[48ch] text-fg-dim">
@@ -108,7 +110,7 @@ export function Hero() {
             исполнитель на весь проект, без конструкторов и готовых тем.
           </p>
           <div className="hero-cta mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <TelegramButton />
+            <TelegramButton swapLabel />
             <a
               href="#cases"
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-hair-strong px-5 text-[15px] font-medium text-fg transition-colors duration-200 hover:border-accent/60 hover:text-accent"

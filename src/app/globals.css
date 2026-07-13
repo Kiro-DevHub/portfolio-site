@@ -207,6 +207,30 @@ button,
 .hero-line-inner {
   display: block;
 }
+/* Каретка терминала «_» в конце заголовка — сквозная деталь. По умолчанию горит
+   ровно (reduced-motion оставляет её видимой); мигание только при разрешённой
+   анимации. Лёгкий вес и inline-block, чтобы не влиять на геометрию строки. */
+.hero-caret {
+  display: inline-block;
+  margin-left: 0.06em;
+  color: var(--color-accent);
+  font-weight: 300;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-caret {
+    animation: caret-blink 1.05s steps(1) infinite;
+  }
+}
+@keyframes caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
 
 /* ── Marquee технологий: бесшовная петля, пауза на hover ──────────────── */
 .marquee-track {
