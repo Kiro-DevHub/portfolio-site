@@ -5,7 +5,9 @@ import { services } from "@/lib/site";
 /**
  * Услуги — широкие строки с огромной ценой справа (не сетка карточек).
  * Якорь секции: крупные цены (набегают count-up при входе в кадр). Акцент:
- * mono-нумерация, мятный край и подъём поверхности на hover.
+ * mono-нумерация и подъём поверхности на hover. Highlight «под ключ» —
+ * только мятная цена + бейдж, без рамки (левый акцентный край на hover
+ * перекрывал номер строки).
  */
 export function Services() {
   return (
@@ -27,11 +29,6 @@ export function Services() {
           {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 60}>
               <div className="group relative border-t border-hair transition-colors duration-200 last:border-b hover:bg-surface/50">
-                {/* Мятный край, выезжает на hover */}
-                <span
-                  aria-hidden="true"
-                  className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-300 group-hover:scale-y-100"
-                />
                 <div className="grid grid-cols-12 items-baseline gap-x-4 gap-y-3 py-8 sm:py-10">
                   <span className="col-span-2 font-mono text-sm text-accent lg:col-span-1">
                     {String(i + 1).padStart(2, "0")}
