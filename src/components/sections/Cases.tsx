@@ -1,11 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { flagshipCase, soonCases } from "@/lib/site";
 
 /**
- * Кейсы: флагман MAISON в рамке браузера (слот под реальный скриншот) с тегом
- * Lighthouse + карточки «скоро». Якорь секции — рамка браузера.
- * TODO: заменить key-art внутри рамки на реальный скриншот MAISON.
+ * Кейсы: флагман MAISON в рамке браузера с реальным скриншотом (AVIF/WebP,
+ * сконвертирован заранее скриптом scripts/optimize-images.mjs — на статике
+ * серверного оптимизатора нет) + тегом Lighthouse и карточками «скоро».
+ * Якорь секции — рамка браузера.
  */
 export function Cases() {
   return (
@@ -36,22 +38,29 @@ export function Cases() {
                     <span aria-hidden="true">▲</span> maison
                   </span>
                 </div>
-                {/* Слот под реальный скриншот (пока брендовое key-art). Клип-рамка:
-                    внутренний слой масштабируется на hover, overflow обрезает. */}
+                {/* Скриншот в клип-рамке: внутренний слой масштабируется на hover,
+                    overflow обрезает. AVIF с фолбэком WebP через <picture> —
+                    next/image в статике (images.unoptimized) сам не умеет
+                    переключать форматы. */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
-                  <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          "radial-gradient(120% 90% at 30% 15%, rgba(49,208,179,0.14), transparent 58%)",
-                      }}
+                  <picture className="absolute inset-0 block transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                    <source
+                      srcSet="/images/cases/maison.avif"
+                      type="image/avif"
                     />
-                    <span className="relative text-4xl tracking-[0.18em] text-fg sm:text-6xl">
-                      MAISON
-                    </span>
-                  </div>
+                    <source
+                      srcSet="/images/cases/maison.webp"
+                      type="image/webp"
+                    />
+                    <Image
+                      src="/images/cases/maison.webp"
+                      alt="Скриншот хиро-секции сайта MAISON"
+                      width={1400}
+                      height={875}
+                      loading="lazy"
+                      className="size-full object-cover"
+                    />
+                  </picture>
                 </div>
               </div>
             </Link>
