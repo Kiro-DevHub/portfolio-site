@@ -19,8 +19,8 @@ export default function MaisonCasePage() {
       <Link href="/" className="text-sm text-muted hover:text-fg">
         ← На главную
       </Link>
-      <h1 className="mt-6 font-mediumtext-5xl text-fg">MAISON</h1>
-      <p className="mt-4 max-w-xl text-fg-dim">
+      <h1 className="display-section mt-6 text-fg">MAISON</h1>
+      <p className="t-body mt-4 max-w-xl text-fg-dim">
         [заглушка кейса] Премиальный салон красоты. Здесь будет разбор задачи,
         процесса и результата.
       </p>

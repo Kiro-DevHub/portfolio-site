@@ -34,7 +34,7 @@ export function About() {
                     "radial-gradient(120% 90% at 70% 15%, rgba(49,208,179,0.12), transparent 60%)",
                 }}
               />
-              <span className="absolute bottom-4 left-4 font-mono text-[11px] uppercase tracking-[0.22em] text-muted">
+              <span className="t-label absolute bottom-4 left-4 text-muted">
                 фото 4:5
               </span>
             </div>
@@ -46,10 +46,8 @@ export function About() {
           {about.facts.map((fact, i) => (
             <Reveal key={fact.label} delay={i * 60}>
               <div className="raise flex h-full flex-col gap-2 rounded-lg border border-hair bg-surface p-6">
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
-                  {fact.label}
-                </span>
-                <span className="text-lg font-medium leading-snug text-fg">
+                <span className="t-label text-accent">{fact.label}</span>
+                <span className="t-body font-medium leading-snug text-fg">
                   {fact.value}
                 </span>
               </div>

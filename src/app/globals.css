@@ -114,6 +114,34 @@ body {
   max-width: 65ch;
 }
 
+/* Подзаголовки карточек и строк — набраны основным гротеском (Golos), НЕ
+   Unbounded: на этом кегле (24px) дисплейная гарнитура распадается. Единый
+   размер для всех h3 на сайте. */
+.t-h3 {
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Служебный моно-регистр: eyebrow'ы, метки категорий, «скоро». Отдельный
+   «технический» голос — в шкалу основного текста не входит. */
+.t-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+/* ── ШКАЛА КЕГЛЯ (аудит: 5 ступеней текста + 2 служебных регистра) ──────────
+   1. .display-hero    — хиро и финальный CTA (Unbounded 600)
+   2. .display-section — заголовок секции          (Unbounded 600)
+   3. .t-h3            — подзаголовок h3            (Golos 500, 24px)
+   4. .t-body          — основной текст             (Golos 400, 17px)
+   5. .t-small         — вторичный/списки           (Golos 400, 14px)
+   Служебное, вне шкалы: .price-xl (крупная цена, tabular) и .t-label (моно-метка). */
+
 h1,
 h2,
 h3 {

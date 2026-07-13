@@ -86,7 +86,7 @@ export function Hero() {
       <div className="relative mx-auto grid min-h-[calc(100dvh-4rem)] max-w-[1200px] grid-cols-1 items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12">
         {/* Тезис */}
         <div className="lg:col-span-7">
-          <p className="hero-eyebrow font-mono text-xs uppercase tracking-[0.22em] text-muted">
+          <p className="hero-eyebrow t-label text-muted">
             Full-stack разработчик
           </p>
           <h1 className="display-hero mt-6 text-fg">

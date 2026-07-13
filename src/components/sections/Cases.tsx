@@ -59,12 +59,8 @@ export function Cases() {
             {/* Описание */}
             <div className="flex flex-col gap-6 lg:col-span-5">
               <div>
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                  Флагман
-                </p>
-                <h3 className="mt-3 text-3xl font-medium text-fg">
-                  {flagshipCase.title}
-                </h3>
+                <p className="t-label text-accent">Флагман</p>
+                <h3 className="t-h3 mt-3 text-fg">{flagshipCase.title}</h3>
                 <p className="t-body mt-3 text-fg-dim">{flagshipCase.summary}</p>
               </div>
 
@@ -79,9 +75,7 @@ export function Cases() {
                       <div className="tnum font-mono text-xl text-accent">
                         {m.score}
                       </div>
-                      <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-muted">
-                        {m.label}
-                      </div>
+                      <div className="t-label mt-1 text-muted">{m.label}</div>
                     </div>
                   ))}
                 </div>
@@ -122,10 +116,8 @@ export function Cases() {
             <Reveal key={c.slug} delay={i * 60}>
               <article className="raise flex h-full flex-col gap-3 rounded-lg border border-dashed border-hair-strong bg-surface/50 p-6">
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-lg font-medium text-fg">{c.title}</h3>
-                  <span className="shrink-0 font-mono text-[11px] uppercase tracking-wider text-muted">
-                    скоро
-                  </span>
+                  <h3 className="t-h3 text-fg">{c.title}</h3>
+                  <span className="t-label shrink-0 text-muted">скоро</span>
                 </div>
                 <p className="t-small text-fg-dim">{c.summary}</p>
               </article>

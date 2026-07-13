@@ -18,14 +18,12 @@ export function Skills() {
           {skillGroups.map((group, i) => (
             <Reveal key={group.label} delay={i * 60}>
               <div className="raise flex h-full flex-col rounded-lg border border-hair bg-surface/60 p-6">
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
-                  {group.label}
-                </span>
+                <span className="t-label text-accent">{group.label}</span>
                 <ul className="mt-4 divide-y divide-hair">
                   {group.items.map((item, j) => (
                     <li
                       key={item}
-                      className={`py-2.5 text-sm leading-relaxed ${
+                      className={`t-small py-2.5 ${
                         j === 0 ? "text-fg" : "text-fg-dim"
                       }`}
                     >

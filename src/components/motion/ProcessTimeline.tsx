@@ -107,9 +107,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
               </span>
             </div>
             <div className="pt-2.5">
-              <h3 className="text-xl font-medium text-fg sm:text-2xl">
-                {step.action}
-              </h3>
+              <h3 className="t-h3 text-fg">{step.action}</h3>
               <p className="t-body mt-2 max-w-[58ch] text-fg-dim">
                 {step.detail}
               </p>

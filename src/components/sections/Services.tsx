@@ -38,11 +38,9 @@ export function Services() {
                   </span>
                   <div className="col-span-10 lg:col-span-7">
                     <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-xl font-medium text-fg sm:text-2xl">
-                        {service.title}
-                      </h3>
+                      <h3 className="t-h3 text-fg">{service.title}</h3>
                       {service.featured && (
-                        <span className="rounded-sm border border-accent/40 px-2 py-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">
+                        <span className="t-label rounded-sm border border-accent/40 px-2 py-0.5 text-accent">
                           под ключ
                         </span>
                       )}
