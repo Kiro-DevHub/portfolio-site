@@ -85,7 +85,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
   }, []);
 
   return (
-    <ol ref={listRef} className="relative mt-16 max-w-[760px]">
+    <ol ref={listRef} className="relative mt-16 grid grid-cols-12">
       {/* Базовая линия трека */}
       <span
         ref={trackRef}
@@ -99,7 +99,11 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
         className="absolute left-[23px] w-0.5 origin-top scale-y-0 bg-accent"
       />
       {steps.map((step, i) => (
-        <Reveal key={step.action} delay={i * 60}>
+        <Reveal
+          key={step.action}
+          delay={i * 60}
+          className="col-span-12 lg:col-span-10"
+        >
           <li className="grid grid-cols-[auto_1fr] gap-6 pb-12 last:pb-0">
             <div className="flex flex-col items-center">
               <span className="timeline-node relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-hair bg-surface font-mono text-sm text-accent">
@@ -108,7 +112,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
             </div>
             <div className="pt-2.5">
               <h3 className="t-h3 text-fg">{step.action}</h3>
-              <p className="t-body mt-2 max-w-[58ch] text-fg-dim">
+              <p className="t-body mt-2 max-w-[62ch] text-fg-dim">
                 {step.detail}
               </p>
             </div>

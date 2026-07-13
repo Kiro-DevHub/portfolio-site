@@ -11,8 +11,8 @@ export function TechMarquee() {
       className="flex items-center gap-8 whitespace-nowrap px-8"
       aria-hidden={dup || undefined}
     >
-      <span className="font-mono text-sm text-fg-dim">{label}</span>
-      <span aria-hidden="true" className="text-accent/60">
+      <span className="font-mono text-sm text-muted">{label}</span>
+      <span aria-hidden="true" className="text-muted/50">
         /
       </span>
     </li>
@@ -21,7 +21,7 @@ export function TechMarquee() {
   return (
     <section
       aria-label="Технологии, с которыми работаю"
-      className="marquee relative overflow-hidden border-t border-hair py-5"
+      className="marquee relative overflow-hidden border-t border-hair py-10 sm:py-12"
     >
       {/* Мягкие края — растворяем строку у границ секции. */}
       <div
