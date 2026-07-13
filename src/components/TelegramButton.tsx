@@ -19,6 +19,14 @@ type Props = {
   variant?: "primary" | "ghost";
   /** lg — крупный вариант для финального CTA-экрана. */
   size?: "md" | "lg";
+  /** На мобилке (<sm) прячет лейбл — остаётся только иконка (компактная шапка). */
+  compact?: boolean;
+  /**
+   * На hover меняет лейбл на командный «$ open telegram» (моно). Только для
+   * главной кнопки в хиро и финальной CTA — не для всех. Ширина не скачет: обе
+   * подписи лежат в одной grid-ячейке, кнопка равна более широкой из них.
+   */
+  swapLabel?: boolean;
   className?: string;
 };
 
@@ -29,6 +37,8 @@ type Props = {
 export function TelegramButton({
   variant = "primary",
   size = "md",
+  compact = false,
+  swapLabel = false,
   className = "",
 }: Props) {
   const base =
@@ -42,16 +52,37 @@ export function TelegramButton({
       ? "bg-accent text-accent-fg hover:bg-accent-strong"
       : "border border-line text-fg hover:border-accent/60 hover:text-accent";
 
+  // Обе подписи в одной grid-ячейке → ширина кнопки стабильна, кросс-фейд по
+  // opacity. Командный лейбл aria-hidden: доступное имя остаётся русским.
+  const label = swapLabel ? (
+    <span className="grid place-items-center">
+      <span className="col-start-1 row-start-1 transition-opacity duration-200 group-hover:opacity-0">
+        {site.ctaLabel}
+      </span>
+      <span
+        aria-hidden="true"
+        className="col-start-1 row-start-1 font-mono opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+      >
+        $ open telegram
+      </span>
+    </span>
+  ) : (
+    <span className={compact ? "max-sm:hidden" : undefined}>
+      {site.ctaLabel}
+    </span>
+  );
+
   return (
     <Magnetic>
       <a
         href={site.telegramUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${base} ${sizing} ${styles} ${className}`}
+        aria-label={compact ? site.ctaLabel : undefined}
+        className={`${base} ${sizing} ${styles} ${swapLabel ? "group" : ""} ${className}`}
       >
         <TelegramGlyph className={size === "lg" ? "size-5" : "size-[18px]"} />
-        {site.ctaLabel}
+        {label}
       </a>
     </Magnetic>
   );
