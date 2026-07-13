@@ -47,6 +47,9 @@ export function Services() {
                     <p className="t-body mt-2 max-w-[52ch] text-fg-dim">
                       {service.description}
                     </p>
+                    <p className="mt-2 max-w-[52ch] font-mono text-xs text-muted">
+                      Входит: {service.includes.join(" · ")}
+                    </p>
                   </div>
                   <div className="col-span-12 lg:col-span-4 lg:text-right">
                     <CountUpPrice
