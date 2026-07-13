@@ -91,6 +91,18 @@ export function About() {
           </Reveal>
         </div>
 
+        {/* Строка метрик — только проверяемые цифры, без выдуманных «клиентов». */}
+        <Reveal delay={60}>
+          <p className="t-small mt-12 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-hair pt-6 font-mono text-muted">
+            {about.metrics.map((metric, i) => (
+              <span key={metric} className="flex items-center gap-2">
+                {i > 0 && <span aria-hidden="true">·</span>}
+                {metric}
+              </span>
+            ))}
+          </p>
+        </Reveal>
+
         {/* Факт-плашки на всю сетку */}
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {about.facts.map((fact, i) => (
