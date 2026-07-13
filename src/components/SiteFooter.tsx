@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 import { TelegramButton } from "@/components/TelegramButton";
+import { LocalTime } from "@/components/LocalTime";
 
 /** Футер: финальный CTA в Telegram (тот же лейбл) + контактная строка. */
 export function SiteFooter() {
@@ -32,6 +33,7 @@ export function SiteFooter() {
               <span className="online-dot" aria-hidden="true" />
               на связи
             </span>
+            <LocalTime />
             <span>© {year}</span>
           </div>
         </div>
