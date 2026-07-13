@@ -60,7 +60,21 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden border-b border-hair"
     >
-      {/* Радиальный свет акцента, верх-право (сетка теперь общая, на body) */}
+      {/* Фоновая сетка (едва заметные вертикали) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+          backgroundSize: "88px 100%",
+          maskImage:
+            "radial-gradient(120% 80% at 70% 10%, #000 20%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(120% 80% at 70% 10%, #000 20%, transparent 75%)",
+        }}
+      />
+      {/* Радиальный свет акцента, верх-право */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
