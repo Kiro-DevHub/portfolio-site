@@ -92,8 +92,9 @@ export function Hero() {
             </span>
           </h1>
           <p className="hero-sub t-body mt-7 max-w-[48ch] text-fg-dim">
-            Сайты, Telegram-боты и базы данных под задачу бизнеса. Один
-            исполнитель на весь проект, без конструкторов и готовых тем.
+            Сайты, Telegram-боты и базы данных под задачу бизнеса: заявки,
+            продажи, автоматизация. Один исполнитель на весь проект, без
+            конструкторов и готовых тем.
           </p>
           <div className="hero-cta mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
             <TelegramButton swapLabel />
