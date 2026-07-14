@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BrowserFrame } from "@/components/BrowserFrame";
 import { Reveal } from "@/components/Reveal";
 import { SectionPath } from "@/components/SectionPath";
-import { flagshipCase, soonCases } from "@/lib/site";
+import { casePath, flagshipCase, soonCases } from "@/lib/site";
 
 /**
  * Кейсы: флагман MAISON в рамке браузера с реальным скриншотом (AVIF/WebP,
@@ -26,7 +26,7 @@ export function Cases() {
             {/* Рамка браузера-ссылка со слотом под скриншот. Hover [5]: подъём 4px,
                 акцентная граница, скриншот внутри рамки увеличивается до 1.02. */}
             <Link
-              href={`/case/${flagshipCase.slug}`}
+              href={casePath(flagshipCase.slug)}
               aria-label={`Открыть кейс ${flagshipCase.title}`}
               className="group block lg:col-span-7"
             >
@@ -91,7 +91,7 @@ export function Cases() {
               )}
 
               <Link
-                href={`/case/${flagshipCase.slug}`}
+                href={casePath(flagshipCase.slug)}
                 className="group inline-flex items-center gap-2 text-[15px] font-medium text-fg transition-colors hover:text-accent"
               >
                 Открыть кейс

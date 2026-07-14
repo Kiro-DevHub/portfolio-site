@@ -1,5 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
+
+// Своя metadata — иначе страница молча наследует title/OG/Twitter главной
+// (см. layout.tsx) и выглядит дублем главной и в соцсетях, и в поиске.
+const title = "Страница не найдена";
+const description = "Такой страницы нет — возможно, ссылка устарела.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  robots: { index: false, follow: true },
+  openGraph: { title, description },
+  twitter: { card: "summary", title, description },
+};
+
+const prompt = `${site.name.toLowerCase()}@site`;
 
 /**
  * 404 в терминальной стилизации — продолжает мотив SectionPath/hero-caret
@@ -8,9 +24,9 @@ import { site } from "@/lib/site";
 export default function NotFound() {
   return (
     <main className="flex min-h-dvh flex-col items-center justify-center px-5 py-24 text-center">
-      <div className="w-full max-w-[560px] rounded-lg border border-line bg-surface/60 p-8 text-left font-mono text-sm sm:p-10">
+      <div className="w-full max-w-[560px] rounded-lg border border-hair bg-surface p-8 text-left font-mono text-sm sm:p-10">
         <p className="text-muted">
-          <span className="text-accent">{site.name.toLowerCase()}@site</span>
+          <span className="text-accent">{prompt}</span>
           <span className="text-fg-dim">:~$</span> cd /case/404
         </p>
         <p className="mt-3 text-fg">
@@ -23,7 +39,7 @@ export default function NotFound() {
           ошибкой.
         </p>
         <p className="mt-8">
-          <span className="text-accent">{site.name.toLowerCase()}@site</span>
+          <span className="text-accent">{prompt}</span>
           <span className="text-fg-dim">:~$</span>{" "}
           <Link
             href="/"

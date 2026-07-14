@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { caseContentSlugs, getCaseContent } from "@/content/cases";
 import { CaseLayout } from "@/components/case/CaseLayout";
 import { JsonLd } from "@/components/JsonLd";
-import { site } from "@/lib/site";
+import { casePath, site } from "@/lib/site";
 
 // Статический экспорт: пре-рендерим ровно те слаги, для которых есть контент.
 export function generateStaticParams() {
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const study = getCaseContent(slug);
   if (!study) return { title: "Кейс" };
   const title = `Кейс ${study.title}`;
-  const url = `/case/${study.slug}`;
+  const url = casePath(study.slug);
   return {
     title,
     description: study.tagline,
@@ -30,13 +30,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       title,
       description: study.tagline,
-      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: title }],
+      siteName: site.ogSiteName,
+      locale: site.ogLocale,
+      images: [{ ...site.ogImage, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: study.tagline,
-      images: ["/og-image.png"],
+      images: [site.ogImage.url],
     },
   };
 }
@@ -51,14 +53,17 @@ export default async function CasePage({ params }: Props) {
   const study = getCaseContent(slug);
   if (!study) notFound();
 
+  // Каждая страница отдаёт свой независимый script[ld+json] — краулер, зашедший
+  // на /case/[slug] отдельно от главной, не подтянет Person оттуда, поэтому
+  // автора описываем инлайном, а не ссылкой на @id с другой страницы.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     name: study.title,
     description: study.tagline,
-    url: `${site.url}/case/${study.slug}`,
-    image: `${site.url}/og-image.png`,
-    author: { "@id": `${site.url}/#person` },
+    url: `${site.url}${casePath(study.slug)}`,
+    image: `${site.url}${site.ogImage.url}`,
+    author: { "@type": "Person", name: site.name, url: site.url },
     keywords: study.stack.join(", "),
   };
 

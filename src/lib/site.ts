@@ -9,14 +9,33 @@ export const site = {
   // Канонический домен — для metadataBase, og:url, sitemap.xml, JSON-LD.
   // При подключении кастомного домена достаточно задать NEXT_PUBLIC_SITE_URL
   // на билде (Cloudflare Pages → Environment variables), без правки кода.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://kirill-dev.pages.dev",
+  // `||` (не `??`) — пустая строка в переменной тоже должна откатываться на
+  // дефолт; хвостовой слэш срезаем, иначе конкатенация `${url}/path` даёт
+  // двойной слэш в sitemap/robots/JSON-LD.
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://kirill-dev.pages.dev").replace(
+    /\/+$/,
+    ""
+  ),
   // Telegram — основной канал связи и сквозной CTA.
   // TODO: подставить реальный ник (сейчас плейсхолдер).
   telegramUrl: "https://t.me/username",
   telegramHandle: "@username",
   // Локед-лейбл CTA — один и тот же в шапке, хиро и футере (без дубля интента).
   ctaLabel: "Написать в Telegram",
+  // OG/Twitter-картинка — один источник правды на путь и размеры, чтобы не
+  // расходились между layout.tsx и страницей кейса.
+  ogImage: { url: "/og-image.png", width: 1200, height: 630 },
+  // openGraph.siteName/locale — Next не подмешивает их из layout.tsx, если
+  // страница объявляет свой openGraph (объект заменяется целиком), поэтому
+  // страница кейса берёт их отсюда явно.
+  ogSiteName: "Кирилл.dev",
+  ogLocale: "ru_RU",
 } as const;
+
+/** Путь страницы кейса — общий с sitemap.ts, JSON-LD и карточками кейсов. */
+export function casePath(slug: string): string {
+  return `/case/${slug}`;
+}
 
 /** Технологии для бегущей строки между кейсами и процессом — реальный стек. */
 export const technologies: string[] = [

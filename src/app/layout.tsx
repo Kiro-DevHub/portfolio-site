@@ -16,18 +16,18 @@ export const metadata: Metadata = {
   description: homeDescription,
   openGraph: {
     type: "website",
-    locale: "ru_RU",
+    locale: site.ogLocale,
     url: site.url,
-    siteName: `${site.name}.dev`,
+    siteName: site.ogSiteName,
     title: homeTitle,
     description: homeDescription,
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: homeTitle }],
+    images: [{ ...site.ogImage, alt: homeTitle }],
   },
   twitter: {
     card: "summary_large_image",
     title: homeTitle,
     description: homeDescription,
-    images: ["/og-image.png"],
+    images: [site.ogImage.url],
   },
 };
 

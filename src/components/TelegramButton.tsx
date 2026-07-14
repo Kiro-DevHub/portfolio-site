@@ -44,7 +44,14 @@ export function TelegramButton({
   swapLabel = false,
   className = "",
 }: Props) {
-  const href = `${site.telegramUrl}?utm_source=site&utm_medium=${section}`;
+  // URL вместо строковой конкатенации — не ломается, если telegramUrl когда-нибудь
+  // обзаведётся своим query (например, deep-link бота вида ?start=lead).
+  const href = (() => {
+    const url = new URL(site.telegramUrl);
+    url.searchParams.set("utm_source", "site");
+    url.searchParams.set("utm_medium", section);
+    return url.toString();
+  })();
   const base =
     "inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 active:translate-y-px";
   const sizing =
