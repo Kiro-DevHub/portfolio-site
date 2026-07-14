@@ -28,9 +28,8 @@ export function About() {
               остальных карточек секции. Без анимации печати — статичный
               ответ читается быстрее и не выглядит дёшево. Содержимое — паспорт
               самого сайта (стек, сборка, зависимости), а не дубль футера/
-              навыков. Lighthouse здесь сознательно нет: цифры живут в строке
-              метрик ниже и на странице кейса — в терминале они были бы третьим
-              повтором подряд. */}
+              навыков. Lighthouse здесь сознательно нет: цифры живут на карточке
+              кейса и на его странице — здесь были бы третьим повтором подряд. */}
           <Reveal delay={140} className="lg:col-span-5">
             <div className="raise relative w-full max-w-[400px] overflow-hidden rounded-lg border border-hair bg-surface lg:ml-auto">
               <div
@@ -91,20 +90,8 @@ export function About() {
           </Reveal>
         </div>
 
-        {/* Строка метрик — только проверяемые цифры, без выдуманных «клиентов». */}
-        <Reveal delay={60}>
-          <p className="t-small mt-12 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-hair pt-6 font-mono text-muted">
-            {about.metrics.map((metric, i) => (
-              <span key={metric} className="flex items-center gap-2">
-                {i > 0 && <span aria-hidden="true">·</span>}
-                {metric}
-              </span>
-            ))}
-          </p>
-        </Reveal>
-
         {/* Факт-плашки на всю сетку */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {about.facts.map((fact, i) => (
             <Reveal key={fact.label} delay={i * 60}>
               <div className="raise flex h-full flex-col gap-2 rounded-lg border border-hair bg-surface p-6">
