@@ -105,9 +105,17 @@ main > section:nth-of-type(even) {
 .weight-light {
   font-weight: 300;
 }
-/* Крупная цена — правый якорь строки услуги */
+/* Крупная цена — якорь цифр результата на странице кейса */
 .price-xl {
   font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+/* Средняя цена — подпись внизу карточки услуги: заметна, но не спорит
+   с названием и чек-листом (крупный кегль раньше забивал содержание). */
+.price-md {
+  font-size: 1.25rem; /* 20px */
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
@@ -159,7 +167,7 @@ main > section:nth-of-type(even) {
    3. .t-h3            — подзаголовок h3            (Golos 500, 24px)
    4. .t-body          — основной текст             (Golos 400, 17px)
    5. .t-small         — вторичный/списки           (Golos 400, 14px)
-   Служебное, вне шкалы: .price-xl (крупная цена, tabular) и .t-label (моно-метка). */
+   Служебное, вне шкалы: .price-xl / .price-md (цены, tabular) и .t-label (моно-метка). */
 
 h1,
 h2,

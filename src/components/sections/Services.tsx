@@ -4,11 +4,15 @@ import { CountUpPrice } from "@/components/motion/CountUpPrice";
 import { services } from "@/lib/site";
 
 /**
- * Услуги — широкие строки с огромной ценой справа (не сетка карточек).
- * Якорь секции: крупные цены (набегают count-up при входе в кадр). Акцент:
- * mono-нумерация и подъём поверхности на hover. Highlight «под ключ» —
- * только мятная цена + бейдж, без рамки (левый акцентный край на hover
- * перекрывал номер строки).
+ * Услуги — сетка карточек в две колонки: ведёт содержание, цена подписывает.
+ * Внутри карточки одна иерархия сверху вниз: название → описание → чек-лист
+ * «что входит» вертикальным списком (t-small вместо нечитаемого моно-12) →
+ * цена внизу под волоском, средним кеглем в акценте.
+ *
+ * «Комплексная разработка» (featured) занимает обе колонки последней строкой:
+ * ширина и есть акцент, мятная рамка с бейджем «под ключ» его закрепляет.
+ * Hover (подъём + мятная граница) и приглушение соседей — как у остальных
+ * карточек сайта.
  */
 export function Services() {
   return (
@@ -27,40 +31,52 @@ export function Services() {
           </p>
         </Reveal>
 
-        <div className="dim-siblings mt-16">
+        <div className="dim-siblings mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
           {services.map((service, i) => (
-            <Reveal key={service.title} delay={i * 60}>
-              <div className="group relative border-t border-hair transition-colors duration-200 last:border-b hover:bg-surface/50">
-                <div className="grid grid-cols-12 items-baseline gap-x-4 gap-y-3 py-8 sm:py-10">
-                  <span className="col-span-2 font-mono text-sm text-accent lg:col-span-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="col-span-10 lg:col-span-7">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="t-h3 text-fg">{service.title}</h3>
-                      {service.featured && (
-                        <span className="t-label rounded-sm border border-accent/40 px-2 py-0.5 text-accent">
-                          под ключ
-                        </span>
-                      )}
-                    </div>
-                    <p className="t-body mt-2 max-w-[52ch] text-fg-dim">
-                      {service.description}
-                    </p>
-                    <p className="mt-2 max-w-[52ch] font-mono text-xs text-muted">
-                      Входит: {service.includes.join(" · ")}
-                    </p>
-                  </div>
-                  <div className="col-span-12 lg:col-span-4 lg:text-right">
-                    <CountUpPrice
-                      value={service.price}
-                      className={`price-xl ${
-                        service.featured ? "text-accent" : "text-fg"
-                      }`}
-                    />
-                  </div>
+            <Reveal
+              key={service.title}
+              delay={i * 60}
+              className={service.featured ? "sm:col-span-2" : undefined}
+            >
+              <article
+                className={`raise flex h-full flex-col rounded-lg border bg-surface p-6 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-accent/60 sm:p-8 ${
+                  service.featured ? "border-accent/40" : "border-hair"
+                }`}
+              >
+                <div className="flex flex-wrap items-center gap-3">
+                  <h3 className="t-h3 text-fg">{service.title}</h3>
+                  {service.featured && (
+                    <span className="t-label rounded-sm border border-accent/40 px-2 py-0.5 text-accent">
+                      под ключ
+                    </span>
+                  )}
                 </div>
-              </div>
+                <p className="t-body mt-3 max-w-[52ch] text-fg-dim">
+                  {service.description}
+                </p>
+
+                <p className="t-label mt-6 text-muted">Входит</p>
+                {/* mb-8 задаёт минимальный зазор до цены, mt-auto на цене
+                    добирает остаток — карточки в строке выравниваются по низу. */}
+                <ul className="mb-8 mt-3 flex flex-col gap-2">
+                  {service.includes.map((item) => (
+                    <li key={item} className="t-small flex gap-3 text-fg-dim">
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.6em] size-1 shrink-0 rounded-[1px] bg-accent/70"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-auto border-t border-hair pt-5">
+                  <CountUpPrice
+                    value={service.price}
+                    className="price-md text-accent"
+                  />
+                </div>
+              </article>
             </Reveal>
           ))}
         </div>
