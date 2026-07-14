@@ -3,14 +3,32 @@ import { fontVariables } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import "./globals.css";
 
+const homeTitle = "Кирилл — full-stack разработчик на фрилансе в Ростове-на-Дону";
+const homeDescription =
+  "Full-stack разработчик из Ростова-на-Дону: закажите сайт под задачу бизнеса или Telegram-бота под ключ. Вёрстка, серверная логика, база данных — без конструкторов и агентств.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Кирилл — full-stack разработчик на фрилансе в Ростове-на-Дону",
+    default: homeTitle,
     template: `%s · ${site.name} — full-stack разработчик`,
   },
-  description:
-    "Full-stack разработчик из Ростова-на-Дону: закажите сайт под задачу бизнеса или Telegram-бота под ключ. Вёрстка, серверная логика, база данных — без конструкторов и агентств.",
+  description: homeDescription,
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    url: site.url,
+    siteName: `${site.name}.dev`,
+    title: homeTitle,
+    description: homeDescription,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: homeTitle }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description: homeDescription,
+    images: ["/og-image.png"],
+  },
 };
 
 export const viewport: Viewport = {
