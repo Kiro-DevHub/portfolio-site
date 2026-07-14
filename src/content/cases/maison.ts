@@ -37,6 +37,7 @@ export const maison: CaseContent = {
     {
       title: "Архитектура на Astro",
       body: "Статический сайт на Astro: HTML отдаётся готовым, JavaScript подключается точечно и только там, где есть интерактив. Отсюда мгновенная загрузка и ноль фронтенд-фреймворков в рантайме.",
+      featured: true,
     },
     {
       title: "Анимации на GSAP",
@@ -49,6 +50,7 @@ export const maison: CaseContent = {
     {
       title: "Заявки в Telegram",
       body: "Форма записи уходит прямо в Telegram салона через Bot API — без бэкенда, базы и хостинга форм. Администратор видит новую заявку сразу.",
+      featured: true,
     },
     {
       title: "Ленивые Яндекс.Карты",

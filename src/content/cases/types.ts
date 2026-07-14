@@ -18,6 +18,8 @@ export type CaseImage = {
 export type CaseSolutionBlock = {
   title: string;
   body: string;
+  /** Ключевое решение кейса — рендерится крупным блоком на всю ширину. */
+  featured?: boolean;
 };
 
 /** Крупная цифра результата. note — вторичная подпись (например, «было 18 МБ»). */

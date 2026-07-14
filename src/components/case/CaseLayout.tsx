@@ -107,18 +107,37 @@ export function CaseLayout({ content }: { content: CaseContent }) {
               <SectionPath path={`${content.path}/solution`} />
               <h2 className="display-section text-fg">Решение</h2>
             </Reveal>
+            {/* Иерархия: ключевые решения (featured) — во всю ширину и крупным
+                набором, остальные — компактными карточками в два столбца. */}
             <div className="dim-siblings mt-12 grid gap-4 sm:grid-cols-2">
-              {content.solution.map((block, i) => (
-                <Reveal key={block.title} delay={(i % 2) * 60}>
-                  <article className="raise flex h-full flex-col gap-3 rounded-lg border border-hair bg-surface p-6 sm:p-7">
-                    <span className="font-mono text-sm text-accent">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="t-h3 text-fg">{block.title}</h3>
-                    <p className="t-small text-fg-dim">{block.body}</p>
-                  </article>
-                </Reveal>
-              ))}
+              {content.solution.map((block, i) => {
+                const index = String(i + 1).padStart(2, "0");
+                return (
+                  <Reveal
+                    key={block.title}
+                    delay={(i % 2) * 60}
+                    className={block.featured ? "sm:col-span-2" : undefined}
+                  >
+                    {block.featured ? (
+                      <article className="raise h-full rounded-lg border border-accent/25 bg-surface p-6 sm:p-9">
+                        <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] sm:items-start sm:gap-12">
+                          <div>
+                            <span className="font-mono text-sm text-accent">{index}</span>
+                            <h3 className="t-h3 mt-3 text-fg">{block.title}</h3>
+                          </div>
+                          <p className="t-body text-fg-dim">{block.body}</p>
+                        </div>
+                      </article>
+                    ) : (
+                      <article className="raise flex h-full flex-col gap-3 rounded-lg border border-hair bg-surface/60 p-6">
+                        <span className="font-mono text-sm text-muted">{index}</span>
+                        <h3 className="t-h3 text-fg">{block.title}</h3>
+                        <p className="t-small text-fg-dim">{block.body}</p>
+                      </article>
+                    )}
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
