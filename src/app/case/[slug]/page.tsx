@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { caseContentSlugs, getCaseContent } from "@/content/cases";
 import { CaseLayout } from "@/components/case/CaseLayout";
+import { JsonLd } from "@/components/JsonLd";
+import { site } from "@/lib/site";
 
 // Статический экспорт: пре-рендерим ровно те слаги, для которых есть контент.
 export function generateStaticParams() {
@@ -48,5 +50,22 @@ export default async function CasePage({ params }: Props) {
   const { slug } = await params;
   const study = getCaseContent(slug);
   if (!study) notFound();
-  return <CaseLayout content={study} />;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: study.title,
+    description: study.tagline,
+    url: `${site.url}/case/${study.slug}`,
+    image: `${site.url}/og-image.png`,
+    author: { "@id": `${site.url}/#person` },
+    keywords: study.stack.join(", "),
+  };
+
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <CaseLayout content={study} />
+    </>
+  );
 }
