@@ -29,7 +29,8 @@ export function About() {
               ответ читается быстрее и не выглядит дёшево. Содержимое — паспорт
               самого сайта (стек, сборка, зависимости), а не дубль футера/
               навыков. Lighthouse здесь сознательно нет: цифры живут в строке
-              метрик ниже и на странице кейса. */}
+              метрик ниже и на странице кейса — в терминале они были бы третьим
+              повтором подряд. */}
           <Reveal delay={140} className="lg:col-span-5">
             <div className="raise relative w-full max-w-[400px] overflow-hidden rounded-lg border border-hair bg-surface lg:ml-auto">
               <div
@@ -76,10 +77,12 @@ export function About() {
                     <span className="text-fg">&quot;static export&quot;</span>
                     <span className="text-muted">,</span>
                   </div>
+                  {/* Именно "gsap", а не 0: он лежит в dependencies и уезжает в
+                      бандл отдельным чанком. Ноль здесь был бы неправдой. */}
                   <div className="pl-4">
                     <span className="text-accent">&quot;deps&quot;</span>
                     <span className="text-muted">: </span>
-                    <span className="text-fg">0</span>
+                    <span className="text-fg">&quot;gsap&quot;</span>
                   </div>
                   <div className="text-muted">{"}"}</div>
                 </div>
