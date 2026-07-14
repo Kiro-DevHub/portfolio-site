@@ -49,14 +49,14 @@ export default function RootLayout({
           rel="preload"
           as="font"
           type="font/woff2"
-          href="/_next/static/media/962eb93bbefc4303-s.p.woff2"
+          href="/_next/static/media/b7b70529995c26c0-s.p.woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
           as="font"
           type="font/woff2"
-          href="/_next/static/media/da2c04b7005ecc43-s.p.woff2"
+          href="/_next/static/media/7cded29a2b1647c1-s.p.woff2"
           crossOrigin="anonymous"
         />
         <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
