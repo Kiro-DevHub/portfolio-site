@@ -80,7 +80,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
         <section className="border-b border-hair">
           <div className={`${SHELL} py-20 sm:py-28`}>
             <Reveal>
-              <SectionPath path="~/задача" />
+              <SectionPath path={`${content.path}/task`} />
               <h2 className="display-section text-fg">Задача</h2>
               <p className="t-body measure mt-6 text-fg-dim">{content.problem.body}</p>
             </Reveal>
@@ -103,7 +103,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
         <section className="border-b border-hair">
           <div className={`${SHELL} py-20 sm:py-28`}>
             <Reveal>
-              <SectionPath path="~/решение" />
+              <SectionPath path={`${content.path}/solution`} />
               <h2 className="display-section text-fg">Решение</h2>
             </Reveal>
             <div className="dim-siblings mt-12 grid gap-4 sm:grid-cols-2">
@@ -126,7 +126,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
         <section className="border-b border-hair">
           <div className={`${SHELL} py-20 sm:py-28`}>
             <Reveal>
-              <SectionPath path="~/результат" />
+              <SectionPath path={`${content.path}/result`} />
               <h2 className="display-section text-fg">Результат</h2>
             </Reveal>
 
@@ -171,7 +171,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
         <section className="border-b border-hair">
           <div className={`${SHELL} py-20 sm:py-28`}>
             <Reveal>
-              <SectionPath path="~/работы" />
+              <SectionPath path={`${content.path}/gallery`} />
               <h2 className="display-section text-fg">Как выглядит сайт</h2>
               <p className="t-body mt-6 max-w-[52ch] text-fg-dim">
                 Скриншоты живого сайта — от услуг и команды до карты проезда.
@@ -202,7 +202,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
         <section className="border-b border-hair">
           <div className={`${SHELL} py-20 sm:py-28`}>
             <Reveal>
-              <SectionPath path="~/иначе" />
+              <SectionPath path={`${content.path}/retro`} />
               <h2 className="display-section text-fg">Что бы сделал иначе</h2>
               <p className="t-body mt-6 max-w-[54ch] text-fg-dim">
                 Честно про решения, которые не дожили до релиза, — и почему.
@@ -228,7 +228,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
         <section className="border-t border-line">
           <div className={`${SHELL} py-24 sm:py-32`}>
             <Reveal>
-              <SectionPath path="~/дальше" />
+              <SectionPath path={`${content.path}/next`} />
               <h2 className="display-hero text-fg">{content.cta.heading}</h2>
               <p className="t-body mt-6 max-w-[52ch] text-fg-dim">{content.cta.body}</p>
               <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
