@@ -8,7 +8,7 @@ import { flagshipCase, soonCases } from "@/lib/site";
 /**
  * Кейсы: флагман MAISON в рамке браузера с реальным скриншотом (AVIF/WebP,
  * сконвертирован заранее скриптом scripts/optimize-images.mjs — на статике
- * серверного оптимизатора нет) + тегом Lighthouse и карточками «скоро».
+ * серверного оптимизатора нет) + строкой итога и карточками «скоро».
  * Якорь секции — рамка браузера.
  */
 export function Cases() {
@@ -69,21 +69,12 @@ export function Cases() {
                 <p className="t-body mt-3 text-fg-dim">{flagshipCase.summary}</p>
               </div>
 
-              {/* Тег Lighthouse — 4 метрики */}
-              {flagshipCase.lighthouse && (
-                <div className="grid grid-cols-4 gap-2">
-                  {flagshipCase.lighthouse.map((m) => (
-                    <div
-                      key={m.label}
-                      className="raise rounded-lg border border-hair bg-surface p-3 text-center"
-                    >
-                      <div className="tnum font-mono text-xl text-accent">
-                        {m.score}
-                      </div>
-                      <div className="t-label mt-1 text-muted">{m.label}</div>
-                    </div>
-                  ))}
-                </div>
+              {/* Итог одной моно-строкой: полные бейджи Lighthouse — на странице
+                  кейса, здесь они дублировали соседние экраны. */}
+              {flagshipCase.metric && (
+                <p className="tnum font-mono text-sm text-accent">
+                  {flagshipCase.metric}
+                </p>
               )}
 
               {flagshipCase.facts && (

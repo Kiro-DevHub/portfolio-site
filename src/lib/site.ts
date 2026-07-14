@@ -178,8 +178,11 @@ export type CaseStudy = {
   flagship: boolean;
   /** Короткие честные факты о проекте (для превью). */
   facts?: string[];
-  /** Метрики Lighthouse (реальные, из CLAUDE.md) — отдельным тегом. */
-  lighthouse?: { label: string; score: number }[];
+  /**
+   * Итог проекта одной строкой. Развёрнутые бейджи Lighthouse живут только на
+   * странице кейса (секция «Результат») — на главной они дублировались.
+   */
+  metric?: string;
   /** Карточка «скоро» — кейс в работе, страницы ещё нет. */
   soon?: boolean;
 };
@@ -199,13 +202,8 @@ export const cases: CaseStudy[] = [
       "Self-hosted шрифты, ноль фронт-зависимостей",
       "Форма заявки в Telegram",
     ],
-    // Реальные метрики проекта (см. CLAUDE.md) — выносим отдельным тегом.
-    lighthouse: [
-      { label: "Perf", score: 100 },
-      { label: "A11y", score: 100 },
-      { label: "Практики", score: 100 },
-      { label: "SEO", score: 100 },
-    ],
+    // Реальные метрики проекта (см. CLAUDE.md).
+    metric: "Lighthouse 100 · 1 МБ вместо 18 МБ",
   },
   {
     slug: "telegram-bot",

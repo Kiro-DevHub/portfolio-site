@@ -28,8 +28,8 @@ export function About() {
               остальных карточек секции. Без анимации печати — статичный
               ответ читается быстрее и не выглядит дёшево. Содержимое — паспорт
               самого сайта (стек, сборка, зависимости), а не дубль футера/
-              навыков. "lighthouse" закомментирован в выводе, пока нет
-              реального прогона на прод-билде. */}
+              навыков. Lighthouse здесь сознательно нет: цифры живут в строке
+              метрик ниже и на странице кейса. */}
           <Reveal delay={140} className="lg:col-span-5">
             <div className="raise relative w-full max-w-[400px] overflow-hidden rounded-lg border border-hair bg-surface lg:ml-auto">
               <div
@@ -75,9 +75,6 @@ export function About() {
                     <span className="text-muted">: </span>
                     <span className="text-fg">&quot;static export&quot;</span>
                     <span className="text-muted">,</span>
-                  </div>
-                  <div className="pl-4 text-muted">
-                    {'// "lighthouse": "100 / 100 / 100 / 100",'}
                   </div>
                   <div className="pl-4">
                     <span className="text-accent">&quot;deps&quot;</span>
