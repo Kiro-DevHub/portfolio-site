@@ -255,8 +255,9 @@ export function CaseLayout({ content }: { content: CaseContent }) {
                   на связи
                 </span>
                 <span>
-                  {site.name}
-                  <span className="text-accent">.</span>dev
+                  {site.brand}
+                  <span className="text-accent">.</span>
+                  {site.brandTld}
                 </span>
                 <span>© {year}</span>
               </div>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary", title, description },
 };
 
-const prompt = `${site.name.toLowerCase()}@site`;
+const prompt = `${site.brand.toLowerCase()}@site`;
 
 /**
  * 404 в терминальной стилизации — продолжает мотив SectionPath/hero-caret

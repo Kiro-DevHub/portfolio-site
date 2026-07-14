@@ -4,7 +4,15 @@
  */
 
 export const site = {
+  // Имя человека и словознак бренда — разные сущности и расходятся намеренно:
+  // `name` уходит в JSON-LD Person и в SEO-заголовки (по имени ищут человека),
+  // `brand`/`brandName` — в логотип шапки, футер, og:site_name и в название
+  // услуги. Логотип собирается как {brand}.{brandTld}, чтобы точка-акцент
+  // рисовалась отдельным span'ом и не дублировалась строкой в двух местах.
   name: "Кирилл",
+  brand: "Kiro",
+  brandTld: "dev",
+  brandName: "Kiro.dev",
   role: "Full-stack разработчик",
   // Канонический домен — для metadataBase, og:url, sitemap.xml, JSON-LD.
   // При подключении кастомного домена достаточно задать NEXT_PUBLIC_SITE_URL
@@ -28,7 +36,7 @@ export const site = {
   // openGraph.siteName/locale — Next не подмешивает их из layout.tsx, если
   // страница объявляет свой openGraph (объект заменяется целиком), поэтому
   // страница кейса берёт их отсюда явно.
-  ogSiteName: "Кирилл.dev",
+  ogSiteName: "Kiro.dev",
   ogLocale: "ru_RU",
 } as const;
 

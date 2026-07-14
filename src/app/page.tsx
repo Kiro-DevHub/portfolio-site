@@ -11,6 +11,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { site, services } from "@/lib/site";
 
 // Person — сущность (для карточки в поиске и связки с Telegram как соц-профилем).
+// Имя человека здесь остаётся русским: Kiro.dev — словознак бренда, он уходит в
+// alternateName и в название услуги ниже.
 // ProfessionalService — что продаём и по каким ценам (services из lib/site.ts).
 const homeJsonLd = {
   "@context": "https://schema.org",
@@ -19,6 +21,7 @@ const homeJsonLd = {
       "@type": "Person",
       "@id": `${site.url}/#person`,
       name: site.name,
+      alternateName: site.brandName,
       jobTitle: site.role,
       url: site.url,
       sameAs: [site.telegramUrl],
@@ -34,7 +37,7 @@ const homeJsonLd = {
     {
       "@type": "ProfessionalService",
       "@id": `${site.url}/#service`,
-      name: `${site.name} — full-stack разработка`,
+      name: `${site.brandName} — full-stack разработка`,
       description:
         "Разработка сайтов и Telegram-ботов под задачу бизнеса: от лендинга до комплексного проекта с базой данных.",
       url: site.url,

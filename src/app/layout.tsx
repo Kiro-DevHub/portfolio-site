@@ -10,8 +10,11 @@ const homeDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
+    // В шаблоне подстраниц стоит словознак, а не имя: «Кейс MAISON · Kiro.dev».
+    // Имя человека остаётся в homeTitle — по нему ищут в поиске, и главная его
+    // держит целиком.
     default: homeTitle,
-    template: `%s · ${site.name} — full-stack разработчик`,
+    template: `%s · ${site.brandName} — full-stack разработчик`,
   },
   description: homeDescription,
   openGraph: {
