@@ -226,12 +226,3 @@ export const cases: CaseStudy[] = [
 /** Кейсы для превью на главной. */
 export const flagshipCase = cases.find((c) => c.flagship)!;
 export const soonCases = cases.filter((c) => c.soon);
-
-/**
- * Слаги, которые пре-рендерит шаблон /case/[slug].
- * Флагман MAISON исключён — у него собственная страница /case/maison.
- * Демо-слаг "example" оставляем, пока нет реальных не-флагманских кейсов с данными:
- * динамический роут в output:'export' не собирается с нулём путей.
- * Заменить на реальные слаги, когда появятся кейсы.
- */
-export const templateCaseSlugs: string[] = ["example"];

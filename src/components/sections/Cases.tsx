@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BrowserFrame } from "@/components/BrowserFrame";
 import { Reveal } from "@/components/Reveal";
 import { SectionPath } from "@/components/SectionPath";
 import { flagshipCase, soonCases } from "@/lib/site";
@@ -29,17 +30,10 @@ export function Cases() {
               aria-label={`Открыть кейс ${flagshipCase.title}`}
               className="group block lg:col-span-7"
             >
-              <div className="raise overflow-hidden rounded-lg border border-hair bg-surface transition-[transform,border-color] duration-300 group-hover:-translate-y-1 group-hover:border-accent/60">
-                <div className="flex items-center gap-3 border-b border-hair px-4 py-3">
-                  <span className="flex gap-1.5" aria-hidden="true">
-                    <span className="size-2.5 rounded-full bg-surface-2" />
-                    <span className="size-2.5 rounded-full bg-surface-2" />
-                    <span className="size-2.5 rounded-full bg-surface-2" />
-                  </span>
-                  <span className="ml-2 inline-flex items-center gap-1.5 rounded bg-surface-2 px-3 py-1 font-mono text-xs text-muted">
-                    <span aria-hidden="true">▲</span> maison
-                  </span>
-                </div>
+              <BrowserFrame
+                label="maison"
+                className="raise transition-[transform,border-color] duration-300 group-hover:-translate-y-1 group-hover:border-accent/60"
+              >
                 {/* Скриншот в клип-рамке: внутренний слой масштабируется на hover,
                     overflow обрезает. AVIF с фолбэком WebP через <picture> —
                     next/image в статике (images.unoptimized) сам не умеет
@@ -64,7 +58,7 @@ export function Cases() {
                     />
                   </picture>
                 </div>
-              </div>
+              </BrowserFrame>
             </Link>
 
             {/* Описание */}
