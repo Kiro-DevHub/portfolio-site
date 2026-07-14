@@ -21,7 +21,8 @@ const useIsoLayoutEffect =
  * Хиро — тезис «не шаблон». Композиция на 12 колонок: слева тезис, справа
  * якорь из слоёв. Глубина: радиальный свет + фоновая сетка, без WebGL.
  * Моушн [1]: построчный reveal заголовка из-под маски со stagger, затем fade
- * подзаголовка, кнопок и якоря. Прячем стартовые состояния через gsap.set —
+ * подзаголовка и кнопок, и следом слои якоря собираются по одному сверху вниз.
+ * Прячем стартовые состояния через gsap.set —
  * если JS не отработает, контент виден; GSAP просыпается на возврате вкладки.
  */
 export function Hero() {
@@ -37,7 +38,10 @@ export function Hero() {
         opacity: 0,
         y: 16,
       });
-      gsap.set(q(".hero-anchor"), { opacity: 0, x: 24 });
+      // Стаггер по самим карточкам, а не по обёртке .hero-anchor: обёртка
+      // проявляла все три разом. Слои — стопка, поэтому и собираться должны
+      // сверху вниз, по одному.
+      gsap.set(q(".hero-layer"), { opacity: 0, x: 24 });
       gsap.set(q(".hero-line-inner"), { yPercent: 110 });
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -49,7 +53,11 @@ export function Hero() {
         )
         .to(q(".hero-sub"), { opacity: 1, y: 0, duration: 0.6 }, "-=0.35")
         .to(q(".hero-cta"), { opacity: 1, y: 0, duration: 0.6 }, "-=0.45")
-        .to(q(".hero-anchor"), { opacity: 1, x: 0, duration: 0.7 }, "-=0.55");
+        .to(
+          q(".hero-layer"),
+          { opacity: 1, x: 0, duration: 0.6, stagger: 0.14 },
+          "-=0.55",
+        );
     }, el);
     return () => ctx.revert();
   }, []);
@@ -126,21 +134,23 @@ export function Hero() {
         <div className="hero-anchor hidden lg:col-span-5 lg:block">
           {/* Ширина карточки = 100% − 56px, а нижние сдвинуты на +28/+56px вправо:
               правый край самой смещённой («Данные») ровно совпадает с контейнером —
-              больше не обрезается краем секции. */}
+              больше не обрезается краем секции. Ступенька задана через left, а не
+              translateX: transform целиком принадлежит GSAP (он стаггерит карточки
+              по x), и инлайновый translateX затирался бы на первом же кадре. */}
           <div className="relative mx-auto h-[360px] w-full max-w-[400px]">
             {layers.map((layer, i) => (
               <a
                 key={layer.n}
                 href="#services"
                 aria-label={`${layer.label}: ${layer.desc}. Перейти к услугам`}
-                className={`group raise absolute left-0 block w-[calc(100%-56px)] rounded-lg border bg-surface/80 px-5 py-4 backdrop-blur-sm transition-colors duration-300 hover:border-accent/50 focus-visible:border-accent/50 ${
+                className={`hero-layer group raise absolute block w-[calc(100%-56px)] rounded-lg border bg-surface/80 px-5 py-4 backdrop-blur-sm transition-colors duration-300 hover:border-accent/50 focus-visible:border-accent/50 ${
                   i === 0
                     ? "border-l-2 border-l-accent border-y-hair border-r-hair glow-accent"
                     : "border-hair"
                 }`}
                 style={{
                   top: `${i * 96}px`,
-                  transform: `translateX(${i * 28}px)`,
+                  left: `${i * 28}px`,
                   zIndex: layers.length - i,
                 }}
               >
