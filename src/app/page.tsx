@@ -24,7 +24,7 @@ const homeJsonLd = {
       alternateName: site.brandName,
       jobTitle: site.role,
       url: site.url,
-      sameAs: [site.telegramUrl],
+      sameAs: [site.telegramUrl, site.githubUrl],
       knowsAbout: [
         "Next.js",
         "React",

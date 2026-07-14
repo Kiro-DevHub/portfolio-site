@@ -28,6 +28,10 @@ export const site = {
   // TODO: подставить реальный ник (сейчас плейсхолдер).
   telegramUrl: "https://t.me/username",
   telegramHandle: "@username",
+  // GitHub — второй канал доверия после Telegram: заказчик идёт смотреть код.
+  // Ссылка живёт в футере, ник — строкой в терминале «Обо мне» и в sameAs JSON-LD.
+  githubUrl: "https://github.com/Kiro-DevHub",
+  githubHandle: "Kiro-DevHub",
   // Локед-лейбл CTA — один и тот же в шапке, хиро и футере (без дубля интента).
   ctaLabel: "Написать в Telegram",
   // OG/Twitter-картинка — один источник правды на путь и размеры, чтобы не

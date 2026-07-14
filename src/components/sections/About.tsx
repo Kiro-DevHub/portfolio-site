@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionPath } from "@/components/SectionPath";
-import { about } from "@/lib/site";
+import { about, site } from "@/lib/site";
 
 /**
  * Обо мне — асимметричный сплит: крупный абзац слева, карточка-терминал
@@ -82,6 +82,14 @@ export function About() {
                     <span className="text-accent">&quot;deps&quot;</span>
                     <span className="text-muted">: </span>
                     <span className="text-fg">&quot;gsap&quot;</span>
+                    <span className="text-muted">,</span>
+                  </div>
+                  {/* Ник, а не ссылка: это вывод `cat`, а подчёркнутый линк
+                      сломал бы фикцию терминала. Кликабельный GitHub — в футере. */}
+                  <div className="pl-4">
+                    <span className="text-accent">&quot;github&quot;</span>
+                    <span className="text-muted">: </span>
+                    <span className="text-fg">&quot;{site.githubHandle}&quot;</span>
                   </div>
                   <div className="text-muted">{"}"}</div>
                 </div>
