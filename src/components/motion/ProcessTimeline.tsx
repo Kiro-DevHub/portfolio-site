@@ -103,23 +103,27 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
       {steps.map((step, i) => (
         // Обёртка Reveal сама рендерится как <li>: <ol> должен содержать
         // только <li>, иначе список перестаёт быть списком для скринридеров.
+        // На lg шаг — строка на все 12 колонок: узел | действие | описание.
+        // Раньше он занимал 10 из 12, а описание стояло под заголовком — контент
+        // жался влево, правая треть пустовала. Позиции в сетке проставлены явно:
+        // на автоплейсменте описание уезжало во вторую строку и на десктопе.
         <Reveal
           key={step.action}
           as="li"
           delay={i * 60}
-          className="col-span-12 grid grid-cols-[auto_1fr] gap-6 pb-12 last:pb-0 lg:col-span-10"
+          className="col-span-12 grid grid-cols-[auto_1fr] gap-x-6 pb-12 last:pb-0 lg:grid-cols-[auto_minmax(0,4fr)_minmax(0,6fr)] lg:gap-x-10"
         >
-          <div className="flex flex-col items-center">
+          <div className="col-start-1 row-start-1 flex flex-col items-center">
             <span className="timeline-node relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-hair bg-surface font-mono text-sm text-accent">
               {String(i + 1).padStart(2, "0")}
             </span>
           </div>
-          <div className="pt-2.5">
-            <h3 className="t-h3 text-fg">{step.action}</h3>
-            <p className="t-body mt-2 max-w-[62ch] text-fg-dim">
-              {step.detail}
-            </p>
-          </div>
+          <h3 className="t-h3 col-start-2 row-start-1 pt-2.5 text-fg">
+            {step.action}
+          </h3>
+          <p className="t-body col-start-2 row-start-2 mt-2 max-w-[62ch] text-fg-dim lg:col-start-3 lg:row-start-1 lg:mt-0 lg:pt-3">
+            {step.detail}
+          </p>
         </Reveal>
       ))}
     </ol>
