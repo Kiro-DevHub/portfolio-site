@@ -6,6 +6,10 @@
 export const site = {
   name: "Кирилл",
   role: "Full-stack разработчик",
+  // Канонический домен — для metadataBase, og:url, sitemap.xml, JSON-LD.
+  // При подключении кастомного домена достаточно задать NEXT_PUBLIC_SITE_URL
+  // на билде (Cloudflare Pages → Environment variables), без правки кода.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://kirill-dev.pages.dev",
   // Telegram — основной канал связи и сквозной CTA.
   // TODO: подставить реальный ник (сейчас плейсхолдер).
   telegramUrl: "https://t.me/username",

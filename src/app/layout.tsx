@@ -4,9 +4,13 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: `${site.name}, ${site.role}`,
+  metadataBase: new URL(site.url),
+  title: {
+    default: "Кирилл — full-stack разработчик на фрилансе в Ростове-на-Дону",
+    template: `%s · ${site.name} — full-stack разработчик`,
+  },
   description:
-    "Full-stack разработка под задачу бизнеса: сайты, Telegram-боты, базы данных и интеграции. Не шаблоны с конструктора.",
+    "Full-stack разработчик из Ростова-на-Дону: закажите сайт под задачу бизнеса или Telegram-бота под ключ. Вёрстка, серверная логика, база данных — без конструкторов и агентств.",
 };
 
 export const viewport: Viewport = {

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const study = getCaseContent(slug);
   if (!study) return { title: "Кейс" };
   return {
-    title: `Кейс: ${study.title}`,
+    title: `Кейс ${study.title}`,
     description: study.tagline,
   };
 }
