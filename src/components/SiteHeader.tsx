@@ -95,11 +95,13 @@ export function SiteHeader() {
             className="inline-flex size-11 items-center justify-center rounded-lg border border-hair text-fg md:hidden"
           >
             {/* Гамбургер из трёх линий (CSS-примитив, не декоративный SVG):
-                складывается в крест при открытии. */}
+                складывается в крест при открытии. Линии ездят через translate,
+                а не через top: top — свойство раскладки, его анимация гоняет
+                лейаут каждый кадр. */}
             <span aria-hidden="true" className="relative block h-3 w-5">
               <span
-                className={`absolute left-0 block h-0.5 w-5 bg-current transition-all duration-200 ${
-                  open ? "top-[5px] rotate-45" : "top-0"
+                className={`absolute left-0 top-0 block h-0.5 w-5 bg-current transition-transform duration-200 ${
+                  open ? "translate-y-[5px] rotate-45" : "translate-y-0"
                 }`}
               />
               <span
@@ -108,8 +110,8 @@ export function SiteHeader() {
                 }`}
               />
               <span
-                className={`absolute left-0 block h-0.5 w-5 bg-current transition-all duration-200 ${
-                  open ? "top-[5px] -rotate-45" : "top-[10px]"
+                className={`absolute left-0 top-0 block h-0.5 w-5 bg-current transition-transform duration-200 ${
+                  open ? "translate-y-[5px] -rotate-45" : "translate-y-[10px]"
                 }`}
               />
             </span>
