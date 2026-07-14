@@ -10,11 +10,18 @@ import { services } from "@/lib/site";
  *
  * Карточка — три зоны сверху вниз, разделённые волосками:
  *   шапка (номер → название → описание) на surface,
- *   «Входит» на surface-2 с flex-1,
+ *   «Входит» на surface-2,
  *   цена в подвале.
  * Зона «Входит» забирает весь остаток высоты СОБОЙ, а не воздухом: у короткого
  * списка панель просто выше изнутри. Так карточки выравниваются по низу без
  * дыры над ценой — раньше её оставлял mt-auto на цене.
+ *
+ * На десктопе три зоны выровнены МЕЖДУ карточками через subgrid: строки задаёт
+ * контейнер (auto/1fr/auto), карточки их наследуют. Без этого волоски разъезжались
+ * по вертикали — заголовок «Telegram-бот или Mini App» встаёт в две строки и
+ * опускал панель на 30px относительно соседей. Высоту каждой зоны теперь диктует
+ * самая длинная из трёх, а не содержимое карточки. На мобильном колонка одна,
+ * выравнивать не с чем — там остаётся обычный flex-столбец.
  *
  * Номер здесь несёт смысл: услуги читаются по возрастанию объёма и цены,
  * 03 — сумма 01 и 02.
@@ -36,11 +43,18 @@ export function Services() {
           </p>
         </Reveal>
 
-        <div className="dim-siblings mt-16 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
+        {/* gap-y на lg обнулён: карточки там стоят в один ряд, зазор по вертикали
+            между ними не нужен, а subgrid унаследовал бы его внутрь карточки и
+            расклеил зоны, которые должны стыковаться волоском. */}
+        <div className="dim-siblings mt-16 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
           {services.map((service, i) => (
-            <Reveal key={service.title} delay={i * 60} className="h-full">
+            <Reveal
+              key={service.title}
+              delay={i * 60}
+              className="h-full lg:row-span-3 lg:grid lg:grid-rows-subgrid"
+            >
               <article
-                className={`raise flex h-full flex-col overflow-hidden rounded-lg border bg-surface transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-accent/60 ${
+                className={`raise flex h-full flex-col overflow-hidden rounded-lg border bg-surface transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-accent/60 lg:row-span-3 lg:grid lg:grid-rows-subgrid ${
                   service.featured ? "border-accent/40" : "border-hair"
                 }`}
               >
