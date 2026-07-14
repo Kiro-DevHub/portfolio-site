@@ -48,8 +48,11 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
       </head>
       <body>
+        {/* Цель — #main, который есть на каждой странице. Раньше вела на #top:
+            он живёт только в хиро главной, поэтому на кейсе и 404 ссылка
+            указывала в никуда. */}
         <a
-          href="#top"
+          href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2 focus:text-fg"
         >
           Перейти к содержимому

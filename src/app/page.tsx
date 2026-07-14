@@ -58,7 +58,7 @@ export default function HomePage() {
     <>
       <JsonLd data={homeJsonLd} />
       <SiteHeader />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero />
         <Services />
         <Cases />

@@ -23,7 +23,11 @@ const prompt = `${site.name.toLowerCase()}@site`;
  */
 export default function NotFound() {
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center px-5 py-24 text-center">
+    <main
+      id="main"
+      tabIndex={-1}
+      className="flex min-h-dvh flex-col items-center justify-center px-5 py-24 text-center"
+    >
       <div className="w-full max-w-[560px] rounded-lg border border-hair bg-surface p-8 text-left font-mono text-sm sm:p-10">
         <p className="text-muted">
           <span className="text-accent">{prompt}</span>

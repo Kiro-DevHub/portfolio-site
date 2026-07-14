@@ -40,7 +40,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
   return (
     <>
       <CaseHeader />
-      <main>
+      <main id="main" tabIndex={-1}>
         {/* ── Хиро ──────────────────────────────────────────────────────── */}
         <section className="border-b border-hair">
           <div className={`${SHELL} py-16 sm:py-24`}>

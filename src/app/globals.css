@@ -329,3 +329,10 @@ button,
   outline-offset: 2px;
   border-radius: 2px;
 }
+
+/* <main> получает tabindex="-1" только как цель skip-ссылки: фокус туда уводим
+   программно, а рамку вокруг всей страницы не рисуем — она бы сбивала с толку. */
+main[tabindex="-1"]:focus,
+main[tabindex="-1"]:focus-visible {
+  outline: none;
+}
