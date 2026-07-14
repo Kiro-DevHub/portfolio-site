@@ -45,6 +45,20 @@ export default function RootLayout({
   return (
     <html lang="ru" className={fontVariables} suppressHydrationWarning>
       <head>
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="/_next/static/media/962eb93bbefc4303-s.p.woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="/_next/static/media/da2c04b7005ecc43-s.p.woff2"
+          crossOrigin="anonymous"
+        />
         <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
       </head>
       <body>
