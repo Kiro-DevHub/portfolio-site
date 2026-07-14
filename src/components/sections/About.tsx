@@ -98,8 +98,11 @@ export function About() {
           </Reveal>
         </div>
 
-        {/* Факт-плашки на всю сетку */}
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {/* Факт-плашки на всю сетку. Три в ряд — с lg, как у карточек услуг:
+            на sm колонка сжималась до 236px, и «2 года разработки» в одну строку
+            стояло рядом с двумя фактами по три — ряд шёл рваным. Это была
+            единственная секция, уходившая в три колонки уже на 640px. */}
+        <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3">
           {about.facts.map((fact, i) => (
             <Reveal key={fact.label} delay={i * 60}>
               <div className="raise flex h-full flex-col gap-2 rounded-lg border border-hair bg-surface p-6">
