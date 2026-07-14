@@ -99,24 +99,25 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
         className="absolute left-[23px] w-0.5 origin-top scale-y-0 bg-accent"
       />
       {steps.map((step, i) => (
+        // Обёртка Reveal сама рендерится как <li>: <ol> должен содержать
+        // только <li>, иначе список перестаёт быть списком для скринридеров.
         <Reveal
           key={step.action}
+          as="li"
           delay={i * 60}
-          className="col-span-12 lg:col-span-10"
+          className="col-span-12 grid grid-cols-[auto_1fr] gap-6 pb-12 last:pb-0 lg:col-span-10"
         >
-          <li className="grid grid-cols-[auto_1fr] gap-6 pb-12 last:pb-0">
-            <div className="flex flex-col items-center">
-              <span className="timeline-node relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-hair bg-surface font-mono text-sm text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </div>
-            <div className="pt-2.5">
-              <h3 className="t-h3 text-fg">{step.action}</h3>
-              <p className="t-body mt-2 max-w-[62ch] text-fg-dim">
-                {step.detail}
-              </p>
-            </div>
-          </li>
+          <div className="flex flex-col items-center">
+            <span className="timeline-node relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-hair bg-surface font-mono text-sm text-accent">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+          </div>
+          <div className="pt-2.5">
+            <h3 className="t-h3 text-fg">{step.action}</h3>
+            <p className="t-body mt-2 max-w-[62ch] text-fg-dim">
+              {step.detail}
+            </p>
+          </div>
         </Reveal>
       ))}
     </ol>

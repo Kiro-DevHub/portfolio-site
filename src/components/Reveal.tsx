@@ -7,6 +7,12 @@ type Props = {
   className?: string;
   /** Задержка появления, мс — для лёгкого стаггера соседних элементов. */
   delay?: number;
+  /**
+   * Тег обёртки. По умолчанию div, но внутри <ol>/<ul> обёртка обязана быть
+   * <li>: посторонний div между списком и его пунктами ломает семантику
+   * списка для скринридеров.
+   */
+  as?: "div" | "li";
 };
 
 /**
@@ -15,8 +21,8 @@ type Props = {
  * гейтит по .js + prefers-reduced-motion — здесь только переключение класса.
  * Никакого WebGL и слушателей scroll.
  */
-export function Reveal({ children, className, delay = 0 }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
+export function Reveal({ children, className, delay = 0, as: Tag = "div" }: Props) {
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -37,13 +43,13 @@ export function Reveal({ children, className, delay = 0 }: Props) {
   }, []);
 
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={ref as React.Ref<HTMLDivElement & HTMLLIElement>}
       data-reveal
       className={className}
       style={delay ? ({ "--reveal-delay": `${delay}ms` } as React.CSSProperties) : undefined}
     >
       {children}
-    </div>
+    </Tag>
   );
 }
