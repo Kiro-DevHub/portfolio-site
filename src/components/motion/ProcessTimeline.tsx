@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { Reveal } from "@/components/Reveal";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+// ScrollTrigger отдельно не импортируем: плагин регистрирует сам @/lib/gsap при
+// загрузке модуля, а здесь он нужен только как конфиг scrollTrigger у твина.
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import type { ProcessStep } from "@/lib/site";
 
 /**
