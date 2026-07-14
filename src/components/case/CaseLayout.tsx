@@ -3,6 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import { SectionPath } from "@/components/SectionPath";
 import { TelegramButton } from "@/components/TelegramButton";
 import { BrowserFrame } from "@/components/BrowserFrame";
+import { CaseGallery } from "@/components/case/CaseGallery";
 import { CaseHeader } from "@/components/case/CaseHeader";
 import { CaseImage } from "@/components/case/CaseImage";
 import { site } from "@/lib/site";
@@ -175,24 +176,12 @@ export function CaseLayout({ content }: { content: CaseContent }) {
               <h2 className="display-section text-fg">Как выглядит сайт</h2>
               <p className="t-body mt-6 max-w-[52ch] text-fg-dim">
                 Скриншоты живого сайта — от услуг и команды до карты проезда.
+                Кликните, чтобы рассмотреть в натуральную величину.
               </p>
             </Reveal>
             <Reveal delay={80}>
-              {/* Масонри: у секций разная высота, columns раскладывает без дыр. */}
-              <div className="mt-10 gap-4 sm:columns-2 [&>*]:mb-4">
-                {content.gallery.map((img) => (
-                  <figure
-                    key={img.src}
-                    className="break-inside-avoid overflow-hidden rounded-lg border border-hair bg-surface"
-                  >
-                    <CaseImage image={img} />
-                    {img.caption && (
-                      <figcaption className="border-t border-hair px-4 py-3 font-mono text-xs text-muted">
-                        {img.caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                ))}
+              <div className="mt-10">
+                <CaseGallery images={content.gallery} />
               </div>
             </Reveal>
           </div>
