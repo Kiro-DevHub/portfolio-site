@@ -16,6 +16,8 @@ function TelegramGlyph({ className }: { className?: string }) {
 }
 
 type Props = {
+  /** Секция сайта, из которой ушёл клик — utm_medium для отслеживания источника. */
+  section: "header" | "hero" | "footer" | "case_header" | "case_cta";
   variant?: "primary" | "ghost";
   /** lg — крупный вариант для финального CTA-экрана. */
   size?: "md" | "lg";
@@ -35,12 +37,14 @@ type Props = {
  * интента. Высота ≥44px (тач), видимый фокус — из globals.css.
  */
 export function TelegramButton({
+  section,
   variant = "primary",
   size = "md",
   compact = false,
   swapLabel = false,
   className = "",
 }: Props) {
+  const href = `${site.telegramUrl}?utm_source=site&utm_medium=${section}`;
   const base =
     "inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 active:translate-y-px";
   const sizing =
@@ -75,7 +79,7 @@ export function TelegramButton({
   return (
     <Magnetic>
       <a
-        href={site.telegramUrl}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={compact ? site.ctaLabel : undefined}

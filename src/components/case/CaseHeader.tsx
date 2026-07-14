@@ -23,7 +23,7 @@ export function CaseHeader() {
           >
             ← все кейсы
           </Link>
-          <TelegramButton compact className="max-sm:px-4" />
+          <TelegramButton section="case_header" compact className="max-sm:px-4" />
         </div>
       </div>
     </header>

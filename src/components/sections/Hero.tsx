@@ -111,7 +111,7 @@ export function Hero() {
             конструкторов и готовых тем.
           </p>
           <div className="hero-cta mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <TelegramButton swapLabel />
+            <TelegramButton section="hero" swapLabel />
             <a
               href="#cases"
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-hair-strong px-5 text-[15px] font-medium text-fg transition-colors duration-200 hover:border-accent/60 hover:text-accent"

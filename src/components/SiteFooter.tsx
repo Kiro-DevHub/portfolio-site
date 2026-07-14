@@ -21,7 +21,7 @@ export function SiteFooter() {
             Обсудить идею ни к чему не обязывает.
           </p>
           <div className="mt-10">
-            <TelegramButton size="lg" swapLabel className="glow-accent" />
+            <TelegramButton section="footer" size="lg" swapLabel className="glow-accent" />
           </div>
         </Reveal>
 

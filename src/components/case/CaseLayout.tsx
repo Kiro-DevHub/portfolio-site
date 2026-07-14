@@ -240,7 +240,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
               <h2 className="display-hero text-fg">{content.cta.heading}</h2>
               <p className="t-body mt-6 max-w-[52ch] text-fg-dim">{content.cta.body}</p>
               <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <TelegramButton size="lg" swapLabel className="glow-accent" />
+                <TelegramButton section="case_cta" size="lg" swapLabel className="glow-accent" />
                 {content.liveUrl && <LiveLink href={content.liveUrl} />}
               </div>
             </Reveal>

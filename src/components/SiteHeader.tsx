@@ -85,7 +85,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <TelegramButton compact className="max-sm:px-4" />
+          <TelegramButton section="header" compact className="max-sm:px-4" />
           <button
             type="button"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
