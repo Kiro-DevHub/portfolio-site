@@ -33,11 +33,14 @@ export default function NotFound() {
           <span className="text-accent">{prompt}</span>
           <span className="text-fg-dim">:~$</span> cd /case/404
         </p>
-        <p className="mt-3 text-fg">
+        {/* Это и есть заголовок страницы: <h1> обязателен, а строка терминала —
+            единственное, что тут играет его роль. Preflight сбрасывает кегль и
+            насыщенность заголовков в inherit, так что вид не меняется. */}
+        <h1 className="mt-3 text-fg">
           bash: cd: /case/404:{" "}
           <span className="text-fg">command not found</span>
           <span className="hero-caret">_</span>
-        </p>
+        </h1>
         <p className="mt-6 text-fg-dim">
           Такой страницы нет — возможно, ссылка устарела или адрес набран с
           ошибкой.
