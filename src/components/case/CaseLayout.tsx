@@ -11,8 +11,16 @@ import type { CaseContent } from "@/content/cases/types";
 
 const SHELL = "mx-auto max-w-[1100px] px-5 sm:px-8";
 
-/** Ссылка «Открыть сайт ↗» на живой проект. */
-function LiveLink({ href, className = "" }: { href: string; className?: string }) {
+/** Внешняя ссылка со стрелкой — «Открыть сайт» на живой проект или «Открыть код» на репозиторий. */
+function LiveLink({
+  href,
+  label,
+  className = "",
+}: {
+  href: string;
+  label: string;
+  className?: string;
+}) {
   return (
     <a
       href={href}
@@ -20,7 +28,7 @@ function LiveLink({ href, className = "" }: { href: string; className?: string }
       rel="noopener noreferrer"
       className={`group inline-flex items-center gap-2 font-mono text-sm text-fg-dim transition-colors hover:text-accent ${className}`}
     >
-      Открыть сайт
+      {label}
       <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
         ↗
       </span>
@@ -65,7 +73,12 @@ export function CaseLayout({ content }: { content: CaseContent }) {
                 ))}
               </ul>
 
-              {content.liveUrl && <LiveLink href={content.liveUrl} className="mt-7" />}
+              {(content.liveUrl || content.repoUrl) && (
+                <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2">
+                  {content.liveUrl && <LiveLink href={content.liveUrl} label="Открыть сайт" />}
+                  {content.repoUrl && <LiveLink href={content.repoUrl} label="Открыть код" />}
+                </div>
+              )}
             </Reveal>
 
             {/* Обложка в рамке браузера — как флагман в секции кейсов на главной. */}
@@ -241,7 +254,8 @@ export function CaseLayout({ content }: { content: CaseContent }) {
               <p className="t-body mt-6 max-w-[52ch] text-fg-dim">{content.cta.body}</p>
               <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
                 <TelegramButton section="case_cta" size="lg" swapLabel className="glow-accent" />
-                {content.liveUrl && <LiveLink href={content.liveUrl} />}
+                {content.liveUrl && <LiveLink href={content.liveUrl} label="Открыть сайт" />}
+                {content.repoUrl && <LiveLink href={content.repoUrl} label="Открыть код" />}
               </div>
             </Reveal>
 

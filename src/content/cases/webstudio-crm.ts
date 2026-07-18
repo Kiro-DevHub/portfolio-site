@@ -11,6 +11,7 @@ export const webstudioCrm: CaseContent = {
     "CRM-система для веб-студии — клиенты, воронка сделок, задачи, аналитика.",
   path: "~/case/webstudio-crm",
   liveUrl: "https://webstudio-crm-web.vercel.app",
+  repoUrl: "https://github.com/Kiro-DevHub/webstudio-crm",
   stack: ["NestJS", "PostgreSQL", "Prisma", "React", "TypeScript", "Docker", "CI/CD"],
   cover: {
     src: "/images/cases/webstudio-crm",
@@ -29,7 +30,7 @@ export const webstudioCrm: CaseContent = {
   solution: [
     {
       title: "Архитектура и данные",
-      body: "Монорепа на pnpm workspaces: NestJS + TypeScript strict, Prisma-схема с доменными сущностями и реалистичными сидами, Swagger для API. Код открыт: github.com/Kiro-DevHub/webstudio-crm.",
+      body: "Монорепа на pnpm workspaces: NestJS + TypeScript strict, Prisma-схема с доменными сущностями и реалистичными сидами, Swagger для API.",
       featured: true,
     },
     {
