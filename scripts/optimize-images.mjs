@@ -84,3 +84,25 @@ for (const [srcName, destName] of gallery) {
     `public/images/cases/maison/${destName}`,
   );
 }
+
+// Обложка и галерея WebStudio CRM для страницы кейса /case/webstudio-crm.
+await convertCover(
+  "assets/source/crm-kanban.png",
+  "public/images/cases/webstudio-crm",
+);
+console.log("Готово: public/images/cases/webstudio-crm.{avif,webp}");
+
+await mkdir("public/images/cases/webstudio-crm", { recursive: true });
+const crmGallery = [
+  ["crm-analytics", "analytics"],
+  ["crm-clients", "clients"],
+  ["crm-deal-detail", "deal-detail"],
+  ["crm-tasks", "tasks"],
+];
+console.log("Галерея кейса WebStudio CRM (реальные размеры для content):");
+for (const [srcName, destName] of crmGallery) {
+  await convertContain(
+    `assets/source/${srcName}.png`,
+    `public/images/cases/webstudio-crm/${destName}`,
+  );
+}
