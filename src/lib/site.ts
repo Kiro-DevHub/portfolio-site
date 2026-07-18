@@ -253,14 +253,17 @@ export const cases: CaseStudy[] = [
     soon: true,
   },
   {
-    slug: "dashboard",
-    title: "Веб-приложение",
-    summary: "Панель с данными и авторизацией. Кейс готовится.",
+    slug: "webstudio-crm",
+    title: "WebStudio CRM",
+    summary: "Собственный проект: клиенты, воронка сделок, задачи, аналитика.",
     flagship: false,
-    soon: true,
+    facts: ["NestJS, Prisma, PostgreSQL", "JWT-роли, канбан на dnd-kit", "Деплой: Neon + Render + Vercel"],
+    metric: "11 этапов · 3 сервиса в проде · 0 ₽ инфраструктура",
   },
 ];
 
 /** Кейсы для превью на главной. */
 export const flagshipCase = cases.find((c) => c.flagship)!;
+/** Реальные кейсы без собственной flagship-раскладки — карточка со скриншотом. */
+export const secondaryCases = cases.filter((c) => !c.flagship && !c.soon);
 export const soonCases = cases.filter((c) => c.soon);

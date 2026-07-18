@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BrowserFrame } from "@/components/BrowserFrame";
 import { Reveal } from "@/components/Reveal";
 import { SectionPath } from "@/components/SectionPath";
-import { casePath, flagshipCase, soonCases } from "@/lib/site";
+import { casePath, flagshipCase, secondaryCases, soonCases } from "@/lib/site";
 
 /**
  * Кейсы: флагман MAISON в рамке браузера с реальным скриншотом (AVIF/WebP,
@@ -105,6 +105,55 @@ export function Cases() {
             </div>
           </div>
         </Reveal>
+
+        {/* Второй кейс со скриншотом — своя страница есть, но не флагман. */}
+        {secondaryCases.length > 0 && (
+          <div className="dim-siblings mt-8 grid gap-6 sm:grid-cols-2">
+            {secondaryCases.map((c, i) => (
+              <Reveal key={c.slug} delay={i * 60}>
+                <Link
+                  href={casePath(c.slug)}
+                  aria-label={`Открыть кейс ${c.title}`}
+                  className="group raise flex h-full flex-col overflow-hidden rounded-lg border border-hair bg-surface/60 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-accent/60"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
+                    <picture className="absolute inset-0 block transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                      <source srcSet={`/images/cases/${c.slug}.avif`} type="image/avif" />
+                      <source srcSet={`/images/cases/${c.slug}.webp`} type="image/webp" />
+                      <Image
+                        src={`/images/cases/${c.slug}.webp`}
+                        alt={`Скриншот проекта ${c.title}`}
+                        width={1400}
+                        height={875}
+                        loading="lazy"
+                        className="size-full object-cover"
+                      />
+                    </picture>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-3 p-6">
+                    <h3 className="t-h3 text-fg">{c.title}</h3>
+                    <p className="t-small text-fg-dim">{c.summary}</p>
+                    {c.metric && (
+                      <p className="tnum font-mono text-xs text-accent">{c.metric}</p>
+                    )}
+                    {c.facts && (
+                      <ul className="mt-auto flex flex-wrap gap-2 pt-2">
+                        {c.facts.map((fact) => (
+                          <li
+                            key={fact}
+                            className="rounded-sm border border-hair px-2.5 py-1 font-mono text-[12px] text-muted"
+                          >
+                            {fact}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        )}
 
         {/* Карточки «скоро» */}
         <div className="dim-siblings mt-8 grid gap-6 sm:grid-cols-2">
