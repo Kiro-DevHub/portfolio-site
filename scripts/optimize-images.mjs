@@ -85,15 +85,18 @@ for (const [srcName, destName] of gallery) {
   );
 }
 
-// Обложка и галерея WebStudio CRM для страницы кейса /case/webstudio-crm.
+// Обложка WebStudio CRM для превью на главной и хиро страницы кейса —
+// дашборд с крупными KPI-цифрами читается в маленькой карточке лучше,
+// чем канбан с восемью колонками мелкого текста. Канбан живёт в галерее.
 await convertCover(
-  "assets/source/crm-kanban.png",
+  "assets/source/crm-analytics.png",
   "public/images/cases/webstudio-crm",
 );
 console.log("Готово: public/images/cases/webstudio-crm.{avif,webp}");
 
 await mkdir("public/images/cases/webstudio-crm", { recursive: true });
 const crmGallery = [
+  ["crm-kanban", "kanban"],
   ["crm-analytics", "analytics"],
   ["crm-clients", "clients"],
   ["crm-deal-detail", "deal-detail"],

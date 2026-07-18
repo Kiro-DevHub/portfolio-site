@@ -15,7 +15,7 @@ export const webstudioCrm: CaseContent = {
   stack: ["NestJS", "PostgreSQL", "Prisma", "React", "TypeScript", "Docker", "CI/CD"],
   cover: {
     src: "/images/cases/webstudio-crm",
-    alt: "Канбан-доска сделок WebStudio CRM: стадии воронки от лида до сдачи с карточками клиентов",
+    alt: "Дашборд аналитики WebStudio CRM: выручка, конверсия, воронка по стадиям",
     width: 1400,
     height: 875,
   },
@@ -65,6 +65,13 @@ export const webstudioCrm: CaseContent = {
     ],
   },
   gallery: [
+    {
+      src: "/images/cases/webstudio-crm/kanban",
+      alt: "Канбан-доска сделок WebStudio CRM: стадии воронки от лида до сдачи с карточками клиентов",
+      caption: "Канбан сделок",
+      width: 1400,
+      height: 693,
+    },
     {
       src: "/images/cases/webstudio-crm/analytics",
       alt: "Дашборд аналитики: выручка по месяцам, воронка по стадиям, топ менеджеров",

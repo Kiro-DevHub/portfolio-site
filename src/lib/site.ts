@@ -224,8 +224,6 @@ export type CaseStudy = {
   slug: string;
   title: string;
   summary: string;
-  /** Есть ли у кейса собственная страница-флагман (/case/<slug>), а не шаблон. */
-  flagship: boolean;
   /** Короткие честные факты о проекте (для превью). */
   facts?: string[];
   /**
@@ -246,7 +244,6 @@ export const cases: CaseStudy[] = [
     slug: "maison",
     title: "MAISON",
     summary: "Лендинг премиального салона красоты.",
-    flagship: true,
     facts: [
       "Astro, тёмная тема",
       "Self-hosted шрифты, ноль фронт-зависимостей",
@@ -256,24 +253,20 @@ export const cases: CaseStudy[] = [
     metric: "Lighthouse 100 · 1 МБ вместо 18 МБ",
   },
   {
-    slug: "telegram-bot",
-    title: "Telegram-бот",
-    summary: "Приём заявок и автоматизация. Кейс готовится.",
-    flagship: false,
-    soon: true,
-  },
-  {
     slug: "webstudio-crm",
     title: "WebStudio CRM",
     summary: "Собственный проект: клиенты, воронка сделок, задачи, аналитика.",
-    flagship: false,
     facts: ["NestJS, Prisma, PostgreSQL", "JWT-роли, канбан на dnd-kit", "Деплой: Neon + Render + Vercel"],
     metric: "11 этапов · 3 сервиса в проде · 0 ₽ инфраструктура",
   },
+  {
+    slug: "telegram-bot",
+    title: "Telegram-бот",
+    summary: "Приём заявок и автоматизация. Кейс готовится.",
+    soon: true,
+  },
 ];
 
-/** Кейсы для превью на главной. */
-export const flagshipCase = cases.find((c) => c.flagship)!;
-/** Реальные кейсы без собственной flagship-раскладки — карточка со скриншотом. */
-export const secondaryCases = cases.filter((c) => !c.flagship && !c.soon);
+/** Готовые кейсы для сетки превью на главной (у каждого своя страница). */
+export const gridCases = cases.filter((c) => !c.soon);
 export const soonCases = cases.filter((c) => c.soon);

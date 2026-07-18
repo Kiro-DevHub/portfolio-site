@@ -3,13 +3,12 @@ import Link from "next/link";
 import { BrowserFrame } from "@/components/BrowserFrame";
 import { Reveal } from "@/components/Reveal";
 import { SectionPath } from "@/components/SectionPath";
-import { casePath, flagshipCase, secondaryCases, soonCases } from "@/lib/site";
+import { casePath, gridCases, soonCases } from "@/lib/site";
 
 /**
- * Кейсы: флагман MAISON в рамке браузера с реальным скриншотом (AVIF/WebP,
- * сконвертирован заранее скриптом scripts/optimize-images.mjs — на статике
- * серверного оптимизатора нет) + строкой итога и карточками «скоро».
- * Якорь секции — рамка браузера.
+ * Кейсы: равные карточки в сетке 2 колонки (скриншот в рамке браузера,
+ * AVIF/WebP заранее сконвертированы scripts/optimize-images.mjs — на статике
+ * серверного оптимизатора нет) + компактная строка «скоро» под сеткой.
  */
 export function Cases() {
   return (
@@ -20,103 +19,21 @@ export function Cases() {
           <h2 className="display-section text-fg">Кейсы</h2>
         </Reveal>
 
-        {/* Флагман MAISON */}
-        <Reveal delay={80}>
-          <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
-            {/* Рамка браузера-ссылка со слотом под скриншот. Hover [5]: подъём 4px,
-                акцентная граница, скриншот внутри рамки увеличивается до 1.02. */}
-            <Link
-              href={casePath(flagshipCase.slug)}
-              aria-label={`Открыть кейс ${flagshipCase.title}`}
-              className="group block lg:col-span-7"
-            >
-              <BrowserFrame
-                label="maison"
-                className="raise transition-[transform,border-color] duration-300 group-hover:-translate-y-1 group-hover:border-accent/60"
-              >
-                {/* Скриншот в клип-рамке: внутренний слой масштабируется на hover,
-                    overflow обрезает. AVIF с фолбэком WebP через <picture> —
-                    next/image в статике (images.unoptimized) сам не умеет
-                    переключать форматы. */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
-                  <picture className="absolute inset-0 block transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-                    <source
-                      srcSet="/images/cases/maison.avif"
-                      type="image/avif"
-                    />
-                    <source
-                      srcSet="/images/cases/maison.webp"
-                      type="image/webp"
-                    />
-                    <Image
-                      src="/images/cases/maison.webp"
-                      alt="Скриншот хиро-секции сайта MAISON"
-                      width={1400}
-                      height={875}
-                      loading="lazy"
-                      className="size-full object-cover"
-                    />
-                  </picture>
-                </div>
-              </BrowserFrame>
-            </Link>
-
-            {/* Описание */}
-            <div className="flex flex-col gap-6 lg:col-span-5">
-              <div>
-                <p className="t-label text-accent">Флагман</p>
-                <h3 className="t-h3 mt-3 text-fg">{flagshipCase.title}</h3>
-                <p className="t-body mt-3 text-fg-dim">{flagshipCase.summary}</p>
-              </div>
-
-              {/* Итог одной моно-строкой: полные бейджи Lighthouse — на странице
-                  кейса, здесь они дублировали соседние экраны. */}
-              {flagshipCase.metric && (
-                <p className="tnum font-mono text-sm text-accent">
-                  {flagshipCase.metric}
-                </p>
-              )}
-
-              {flagshipCase.facts && (
-                <ul className="flex flex-wrap gap-2">
-                  {flagshipCase.facts.map((fact) => (
-                    <li
-                      key={fact}
-                      className="rounded-sm border border-hair px-2.5 py-1 font-mono text-[12px] text-muted"
-                    >
-                      {fact}
-                    </li>
-                  ))}
-                </ul>
-              )}
-
+        <div className="dim-siblings mt-16 grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+          {gridCases.map((c, i) => (
+            <Reveal key={c.slug} delay={i * 80}>
+              {/* Рамка браузера-ссылка со слотом под скриншот. Hover: подъём 4px,
+                  акцентная граница, скриншот внутри рамки увеличивается до 1.02. */}
               <Link
-                href={casePath(flagshipCase.slug)}
-                className="group inline-flex items-center gap-2 text-[15px] font-medium text-fg transition-colors hover:text-accent"
+                href={casePath(c.slug)}
+                aria-label={`Открыть кейс ${c.title}`}
+                className="group flex h-full flex-col"
               >
-                Открыть кейс
-                <span
-                  aria-hidden="true"
-                  className="transition-transform group-hover:translate-x-1"
+                <BrowserFrame
+                  label={c.slug}
+                  className="raise flex h-full flex-col transition-[transform,border-color] duration-300 group-hover:-translate-y-1 group-hover:border-accent/60"
                 >
-                  →
-                </span>
-              </Link>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Второй кейс со скриншотом — своя страница есть, но не флагман. */}
-        {secondaryCases.length > 0 && (
-          <div className="dim-siblings mt-8 grid gap-6 sm:grid-cols-2">
-            {secondaryCases.map((c, i) => (
-              <Reveal key={c.slug} delay={i * 60}>
-                <Link
-                  href={casePath(c.slug)}
-                  aria-label={`Открыть кейс ${c.title}`}
-                  className="group raise flex h-full flex-col overflow-hidden rounded-lg border border-hair bg-surface/60 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-accent/60"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
+                  <div className="relative aspect-video overflow-hidden bg-surface-2">
                     <picture className="absolute inset-0 block transition-transform duration-500 ease-out group-hover:scale-[1.02]">
                       <source srcSet={`/images/cases/${c.slug}.avif`} type="image/avif" />
                       <source srcSet={`/images/cases/${c.slug}.webp`} type="image/webp" />
@@ -124,20 +41,25 @@ export function Cases() {
                         src={`/images/cases/${c.slug}.webp`}
                         alt={`Скриншот проекта ${c.title}`}
                         width={1400}
-                        height={875}
+                        height={788}
                         loading="lazy"
                         className="size-full object-cover"
                       />
                     </picture>
                   </div>
-                  <div className="flex flex-1 flex-col gap-3 p-6">
-                    <h3 className="t-h3 text-fg">{c.title}</h3>
-                    <p className="t-small text-fg-dim">{c.summary}</p>
+
+                  <div className="flex flex-1 flex-col gap-4 p-6">
+                    <div>
+                      <h3 className="t-h3 text-fg">{c.title}</h3>
+                      <p className="t-small mt-2 text-fg-dim">{c.summary}</p>
+                    </div>
+
                     {c.metric && (
                       <p className="tnum font-mono text-xs text-accent">{c.metric}</p>
                     )}
+
                     {c.facts && (
-                      <ul className="mt-auto flex flex-wrap gap-2 pt-2">
+                      <ul className="flex flex-wrap gap-2">
                         {c.facts.map((fact) => (
                           <li
                             key={fact}
@@ -148,27 +70,37 @@ export function Cases() {
                         ))}
                       </ul>
                     )}
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        )}
 
-        {/* Карточки «скоро» */}
-        <div className="dim-siblings mt-8 grid gap-6 sm:grid-cols-2">
-          {soonCases.map((c, i) => (
-            <Reveal key={c.slug} delay={i * 60}>
-              <article className="raise flex h-full flex-col gap-3 rounded-lg border border-dashed border-hair-strong bg-surface/50 p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="t-h3 text-fg">{c.title}</h3>
-                  <span className="t-label shrink-0 text-muted">скоро</span>
-                </div>
-                <p className="t-small text-fg-dim">{c.summary}</p>
-              </article>
+                    <span className="mt-auto inline-flex items-center gap-2 pt-2 text-[15px] font-medium text-fg transition-colors group-hover:text-accent">
+                      Открыть кейс
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform group-hover:translate-x-1"
+                      >
+                        →
+                      </span>
+                    </span>
+                  </div>
+                </BrowserFrame>
+              </Link>
             </Reveal>
           ))}
         </div>
+
+        {/* Направления в работе — компактная строка, не карточка. */}
+        {soonCases.length > 0 && (
+          <div className="mt-6 flex flex-col gap-2">
+            {soonCases.map((c) => (
+              <p
+                key={c.slug}
+                className="flex items-center gap-3 border-t border-hair py-4 text-[15px] text-fg-dim"
+              >
+                <span className="text-fg">{c.title}</span>
+                <span className="t-label text-muted">скоро</span>
+              </p>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
