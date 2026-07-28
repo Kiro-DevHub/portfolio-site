@@ -13,7 +13,14 @@ import type { CaseImage as CaseImageData } from "@/content/cases/types";
  * ::backdrop уже в платформе, библиотека не нужна. Высокие скриншоты не ужимаем
  * по высоте (текст стал бы снова мелким) — их можно проскроллить внутри рамки.
  */
-export function CaseGallery({ images }: { images: CaseImageData[] }) {
+export function CaseGallery({
+  images,
+  device = "desktop",
+}: {
+  images: CaseImageData[];
+  /** 'mobile' — сетка компактных телефонных карточек вместо масонри во всю ширину. */
+  device?: "desktop" | "mobile";
+}) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState<CaseImageData | null>(null);
 
@@ -24,33 +31,66 @@ export function CaseGallery({ images }: { images: CaseImageData[] }) {
 
   return (
     <>
-      {/* Масонри: у секций разная высота, columns раскладывает без дыр. */}
-      <div className="gap-4 sm:columns-2 [&>*]:mb-4">
-        {images.map((img) => (
-          <figure
-            key={img.src}
-            className="break-inside-avoid overflow-hidden rounded-lg border border-hair bg-surface transition-colors hover:border-accent/60"
-          >
-            <button
-              type="button"
-              onClick={() => open(img)}
-              aria-label={`Открыть скриншот: ${img.caption ?? img.alt}`}
-              className="group block w-full cursor-zoom-in text-left"
+      {device === "mobile" ? (
+        // Мобильные скрины — ровная сетка, несколько экранов в ряд: масонри
+        // на всю ширину растянуло бы узкий портретный кадр до нечитаемого.
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {images.map((img) => (
+            <figure
+              key={img.src}
+              className="overflow-hidden rounded-lg border border-hair bg-surface transition-colors hover:border-accent/60"
             >
-              <CaseImage image={img} />
-              <figcaption className="flex items-center justify-between gap-3 border-t border-hair px-4 py-3 font-mono text-xs text-muted">
-                {img.caption}
-                <span
-                  aria-hidden="true"
-                  className="text-fg-dim transition-colors group-hover:text-accent"
-                >
-                  развернуть ⤢
-                </span>
-              </figcaption>
-            </button>
-          </figure>
-        ))}
-      </div>
+              <button
+                type="button"
+                onClick={() => open(img)}
+                aria-label={`Открыть скриншот: ${img.caption ?? img.alt}`}
+                className="group flex w-full cursor-zoom-in flex-col text-left"
+              >
+                <div className="flex justify-center bg-surface-2/40 p-3">
+                  <CaseImage image={img} intrinsic className="max-h-[260px]" />
+                </div>
+                <figcaption className="flex items-center justify-between gap-2 border-t border-hair px-3 py-2.5 font-mono text-xs text-muted">
+                  {img.caption}
+                  <span
+                    aria-hidden="true"
+                    className="text-fg-dim transition-colors group-hover:text-accent"
+                  >
+                    ⤢
+                  </span>
+                </figcaption>
+              </button>
+            </figure>
+          ))}
+        </div>
+      ) : (
+        // Масонри: у секций разная высота, columns раскладывает без дыр.
+        <div className="gap-4 sm:columns-2 [&>*]:mb-4">
+          {images.map((img) => (
+            <figure
+              key={img.src}
+              className="break-inside-avoid overflow-hidden rounded-lg border border-hair bg-surface transition-colors hover:border-accent/60"
+            >
+              <button
+                type="button"
+                onClick={() => open(img)}
+                aria-label={`Открыть скриншот: ${img.caption ?? img.alt}`}
+                className="group block w-full cursor-zoom-in text-left"
+              >
+                <CaseImage image={img} />
+                <figcaption className="flex items-center justify-between gap-3 border-t border-hair px-4 py-3 font-mono text-xs text-muted">
+                  {img.caption}
+                  <span
+                    aria-hidden="true"
+                    className="text-fg-dim transition-colors group-hover:text-accent"
+                  >
+                    развернуть ⤢
+                  </span>
+                </figcaption>
+              </button>
+            </figure>
+          ))}
+        </div>
+      )}
 
       <dialog
         ref={dialogRef}
@@ -66,8 +106,20 @@ export function CaseGallery({ images }: { images: CaseImageData[] }) {
             }}
             className="flex min-h-full items-start justify-center p-4 sm:p-8"
           >
-            <figure className="max-h-[92vh] max-w-[min(1400px,100%)] overflow-auto rounded-lg border border-hair bg-surface">
-              <CaseImage image={active} priority />
+            <figure
+              className={
+                device === "mobile"
+                  ? "max-h-[92vh] max-w-[min(420px,100%)] overflow-auto rounded-lg border border-hair bg-surface"
+                  : "max-h-[92vh] max-w-[min(1400px,100%)] overflow-auto rounded-lg border border-hair bg-surface"
+              }
+            >
+              {device === "mobile" ? (
+                <div className="flex justify-center bg-surface-2/40 p-4">
+                  <CaseImage image={active} priority intrinsic className="max-h-[80vh]" />
+                </div>
+              ) : (
+                <CaseImage image={active} priority />
+              )}
               <figcaption className="sticky bottom-0 border-t border-hair bg-surface px-4 py-3 font-mono text-xs text-muted">
                 {active.caption}
               </figcaption>

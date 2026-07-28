@@ -10,14 +10,22 @@ export function CaseImage({
   image,
   priority = false,
   className = "",
+  intrinsic = false,
 }: {
   image: CaseImageData;
   /** Обложка над фолдом — грузим сразу; галерея ниже — lazy. */
   priority?: boolean;
+  /** Доп. классы для самого <img> (например, ограничение высоты). */
   className?: string;
+  /**
+   * Портретные скрины телефона (Mini App): без растяжения на всю ширину
+   * контейнера — картинка держит собственные пропорции и ужимается, если
+   * не помещается. Используется с центрирующим родителем (flex justify-center).
+   */
+  intrinsic?: boolean;
 }) {
   return (
-    <picture className={className}>
+    <picture className={intrinsic ? "block" : undefined}>
       <source srcSet={`${image.src}.avif`} type="image/avif" />
       <source srcSet={`${image.src}.webp`} type="image/webp" />
       <Image
@@ -26,7 +34,7 @@ export function CaseImage({
         width={image.width}
         height={image.height}
         {...(priority ? { priority: true } : { loading: "lazy" as const })}
-        className="h-auto w-full"
+        className={`${intrinsic ? "h-auto w-auto max-w-full" : "h-auto w-full"} ${className}`.trim()}
       />
     </picture>
   );

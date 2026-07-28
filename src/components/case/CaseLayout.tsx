@@ -81,11 +81,28 @@ export function CaseLayout({ content }: { content: CaseContent }) {
               )}
             </Reveal>
 
-            {/* Обложка в рамке браузера — как флагман в секции кейсов на главной. */}
+            {/* Обложка в рамке браузера — как флагман в секции кейсов на главной.
+                Mini App со скринами телефона получает узкую рамку по центру:
+                растянутый на всю ширину портретный скрин читался бы хуже. */}
             <Reveal delay={100}>
-              <BrowserFrame label={content.slug} className="mt-12">
-                <CaseImage image={content.cover} priority />
-              </BrowserFrame>
+              {content.device === "mobile" ? (
+                <div className="mx-auto mt-12 w-full max-w-[320px]">
+                  <BrowserFrame label={content.slug}>
+                    <div className="flex justify-center bg-surface-2/40 p-4">
+                      <CaseImage
+                        image={content.cover}
+                        priority
+                        intrinsic
+                        className="max-h-[70vh]"
+                      />
+                    </div>
+                  </BrowserFrame>
+                </div>
+              ) : (
+                <BrowserFrame label={content.slug} className="mt-12">
+                  <CaseImage image={content.cover} priority />
+                </BrowserFrame>
+              )}
             </Reveal>
           </div>
         </section>
@@ -213,7 +230,7 @@ export function CaseLayout({ content }: { content: CaseContent }) {
             </Reveal>
             <Reveal delay={80}>
               <div className="mt-10">
-                <CaseGallery images={content.gallery} />
+                <CaseGallery images={content.gallery} device={content.device} />
               </div>
             </Reveal>
           </div>

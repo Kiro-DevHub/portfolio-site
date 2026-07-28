@@ -12,6 +12,7 @@ export const slotlyk: CaseContent = {
     "Telegram Mini App для записи к частным мастерам — барберам, бровистам, мастерам маникюра, тату, репетиторам.",
   path: "~/case/slotlyk",
   repoUrl: "https://github.com/Kiro-DevHub/slotlyk",
+  device: "mobile",
   stack: [
     "Python",
     "Django",
