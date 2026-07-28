@@ -6,6 +6,7 @@ import { BrowserFrame } from "@/components/BrowserFrame";
 import { CaseGallery } from "@/components/case/CaseGallery";
 import { CaseHeader } from "@/components/case/CaseHeader";
 import { CaseImage } from "@/components/case/CaseImage";
+import { PhoneFrame } from "@/components/case/PhoneFrame";
 import { site } from "@/lib/site";
 import type { CaseContent } from "@/content/cases/types";
 
@@ -82,21 +83,16 @@ export function CaseLayout({ content }: { content: CaseContent }) {
             </Reveal>
 
             {/* Обложка в рамке браузера — как флагман в секции кейсов на главной.
-                Mini App со скринами телефона получает узкую рамку по центру:
-                растянутый на всю ширину портретный скрин читался бы хуже. */}
+                Mini App со скринами телефона получает рамку телефона по центру:
+                десктопная браузерная рамка поверх портретного скрина выглядела
+                бы как чужой контекст (адресная строка у приложения без URL). */}
             <Reveal delay={100}>
               {content.device === "mobile" ? (
-                <div className="mx-auto mt-12 w-full max-w-[320px]">
-                  <BrowserFrame label={content.slug}>
-                    <div className="flex justify-center bg-surface-2/40 p-4">
-                      <CaseImage
-                        image={content.cover}
-                        priority
-                        intrinsic
-                        className="max-h-[70vh]"
-                      />
-                    </div>
-                  </BrowserFrame>
+                <div className="mx-auto mt-12 w-full max-w-[300px]">
+                  <PhoneFrame>
+                    <CaseImage image={content.cover} priority intrinsic className="max-h-[70vh]" />
+                  </PhoneFrame>
+                  <p className="mt-4 text-center font-mono text-xs text-muted">{content.slug}</p>
                 </div>
               ) : (
                 <BrowserFrame label={content.slug} className="mt-12">

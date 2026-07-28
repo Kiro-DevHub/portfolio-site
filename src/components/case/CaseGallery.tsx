@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { CaseImage } from "@/components/case/CaseImage";
+import { PhoneFrame } from "@/components/case/PhoneFrame";
 import type { CaseImage as CaseImageData } from "@/content/cases/types";
 
 /**
@@ -34,22 +35,19 @@ export function CaseGallery({
       {device === "mobile" ? (
         // Мобильные скрины — ровная сетка, несколько экранов в ряд: масонри
         // на всю ширину растянуло бы узкий портретный кадр до нечитаемого.
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3">
           {images.map((img) => (
-            <figure
-              key={img.src}
-              className="overflow-hidden rounded-lg border border-hair bg-surface transition-colors hover:border-accent/60"
-            >
+            <figure key={img.src} className="group mx-auto w-full max-w-[220px]">
               <button
                 type="button"
                 onClick={() => open(img)}
                 aria-label={`Открыть скриншот: ${img.caption ?? img.alt}`}
-                className="group flex w-full cursor-zoom-in flex-col text-left"
+                className="block w-full cursor-zoom-in text-left"
               >
-                <div className="flex justify-center bg-surface-2/40 p-3">
-                  <CaseImage image={img} intrinsic className="max-h-[260px]" />
-                </div>
-                <figcaption className="flex items-center justify-between gap-2 border-t border-hair px-3 py-2.5 font-mono text-xs text-muted">
+                <PhoneFrame className="transition-colors group-hover:border-accent/60">
+                  <CaseImage image={img} intrinsic />
+                </PhoneFrame>
+                <figcaption className="mt-2.5 flex items-center justify-between gap-2 px-1 font-mono text-xs text-muted">
                   {img.caption}
                   <span
                     aria-hidden="true"
@@ -106,24 +104,23 @@ export function CaseGallery({
             }}
             className="flex min-h-full items-start justify-center p-4 sm:p-8"
           >
-            <figure
-              className={
-                device === "mobile"
-                  ? "max-h-[92vh] max-w-[min(420px,100%)] overflow-auto rounded-lg border border-hair bg-surface"
-                  : "max-h-[92vh] max-w-[min(1400px,100%)] overflow-auto rounded-lg border border-hair bg-surface"
-              }
-            >
-              {device === "mobile" ? (
-                <div className="flex justify-center bg-surface-2/40 p-4">
+            {device === "mobile" ? (
+              <figure className="w-full max-w-[340px]">
+                <PhoneFrame>
                   <CaseImage image={active} priority intrinsic className="max-h-[80vh]" />
-                </div>
-              ) : (
+                </PhoneFrame>
+                <figcaption className="mt-4 text-center font-mono text-xs text-muted">
+                  {active.caption}
+                </figcaption>
+              </figure>
+            ) : (
+              <figure className="max-h-[92vh] max-w-[min(1400px,100%)] overflow-auto rounded-lg border border-hair bg-surface">
                 <CaseImage image={active} priority />
-              )}
-              <figcaption className="sticky bottom-0 border-t border-hair bg-surface px-4 py-3 font-mono text-xs text-muted">
-                {active.caption}
-              </figcaption>
-            </figure>
+                <figcaption className="sticky bottom-0 border-t border-hair bg-surface px-4 py-3 font-mono text-xs text-muted">
+                  {active.caption}
+                </figcaption>
+              </figure>
+            )}
 
             <button
               type="button"
