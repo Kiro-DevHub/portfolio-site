@@ -19,7 +19,7 @@ export function Cases() {
           <h2 className="display-section text-fg">Кейсы</h2>
         </Reveal>
 
-        <div className="dim-siblings mt-16 grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+        <div className="dim-siblings mt-16 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-3">
           {gridCases.map((c, i) => (
             <Reveal key={c.slug} delay={i * 80}>
               {/* Рамка браузера-ссылка со слотом под скриншот. Hover: подъём 4px,

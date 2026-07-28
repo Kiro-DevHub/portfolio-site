@@ -1,13 +1,14 @@
 import type { CaseContent } from "./types";
 import { maison } from "./maison";
 import { webstudioCrm } from "./webstudio-crm";
+import { slotlyk } from "./slotlyk";
 
 /**
  * Реестр контента кейсов. Роут /case/[slug] пре-рендерит ровно эти слаги и берёт
  * отсюда данные. Добавить кейс = добавить объект и одну строку в этот массив —
  * вёрстку (CaseLayout) трогать не нужно.
  */
-const caseList: CaseContent[] = [maison, webstudioCrm];
+const caseList: CaseContent[] = [maison, webstudioCrm, slotlyk];
 
 const bySlug = new Map(caseList.map((c) => [c.slug, c]));
 

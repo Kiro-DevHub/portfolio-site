@@ -109,3 +109,39 @@ for (const [srcName, destName] of crmGallery) {
     `public/images/cases/webstudio-crm/${destName}`,
   );
 }
+
+// Обложка Slotlyk для превью на главной — скрины Mini App портретные (телефон),
+// а плитка кейса ждёт 16:9. Кропаем не по центру (обрежет заголовок и карточки
+// пополам), а руками: полоса с вкладками дней и двумя полными карточками записи —
+// читается как список записей мастера даже в маленькой рамке.
+await convertCover(
+  "assets/source/slotlyk-master-bookings.png",
+  "public/images/cases/slotlyk",
+  { left: 0, top: 255, width: 567, height: 319 },
+);
+console.log("Готово: public/images/cases/slotlyk.{avif,webp}");
+
+await mkdir("public/images/cases/slotlyk", { recursive: true });
+
+// Хиро страницы кейса — тот же экран целиком, без кропа (BrowserFrame принимает
+// контент как есть, портретный скрин телефона смотрится нормально).
+await convertContain(
+  "assets/source/slotlyk-master-bookings.png",
+  "public/images/cases/slotlyk/hero",
+);
+
+const slotlykGallery = [
+  ["slotlyk-master-services", "master-services"],
+  ["slotlyk-master-schedule-hours", "master-schedule"],
+  ["slotlyk-master-stats-month", "master-stats"],
+  ["slotlyk-master-card", "master-card"],
+  ["slotlyk-client-bookings", "client-bookings"],
+  ["slotlyk-client-masters", "client-masters"],
+];
+console.log("Галерея кейса Slotlyk (реальные размеры для content):");
+for (const [srcName, destName] of slotlykGallery) {
+  await convertContain(
+    `assets/source/${srcName}.png`,
+    `public/images/cases/slotlyk/${destName}`,
+  );
+}
