@@ -103,6 +103,7 @@ export const techRows = {
     "Linux",
     "Bash",
     "SSH",
+    "pg_dump",
     "Selenium",
     "Lighthouse",
     "ESLint",

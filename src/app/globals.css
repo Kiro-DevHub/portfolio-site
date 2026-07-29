@@ -285,7 +285,7 @@ button,
    одна лента, разрезанная пополам. reverse проигрывает те же кадры от -33.33%
    к 0, поэтому петля остаётся бесшовной. */
 .tech-row-b {
-  animation-duration: 170s;
+  animation-duration: 178s;
   animation-direction: reverse;
 }
 .tech-strip:hover .tech-row {
