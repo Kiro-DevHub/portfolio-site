@@ -25,9 +25,8 @@ export const site = {
     ""
   ),
   // Telegram — основной канал связи и сквозной CTA.
-  // TODO: подставить реальный ник (сейчас плейсхолдер).
-  telegramUrl: "https://t.me/username",
-  telegramHandle: "@username",
+  telegramUrl: "https://t.me/K1ro0",
+  telegramHandle: "@K1ro0",
   // GitHub — второй канал доверия после Telegram: заказчик идёт смотреть код.
   // Ссылка живёт в футере, ник — строкой в терминале «Обо мне» и в sameAs JSON-LD.
   githubUrl: "https://github.com/Kiro-DevHub",
