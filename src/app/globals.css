@@ -275,14 +275,17 @@ button,
   animation-iteration-count: infinite;
   will-change: transform;
 }
+/* Длительность — производная от длины дорожки: держим скорость ~24 и ~16 px/с,
+   а не круглое время прохода. Дорожки стали длиннее (21 пункт вместо 8), и при
+   старых 38s/54s лента улетала бы втрое быстрее. */
 .tech-row-a {
-  animation-duration: 38s;
+  animation-duration: 117s;
 }
 /* Нижняя — навстречу и заметно медленнее: одинаковая скорость читалась бы как
-   одна лента, разрезанная пополам. reverse проигрывает те же кадры от -20% к 0,
-   поэтому петля остаётся бесшовной. */
+   одна лента, разрезанная пополам. reverse проигрывает те же кадры от -33.33%
+   к 0, поэтому петля остаётся бесшовной. */
 .tech-row-b {
-  animation-duration: 54s;
+  animation-duration: 170s;
   animation-direction: reverse;
 }
 .tech-strip:hover .tech-row {
@@ -290,8 +293,8 @@ button,
 }
 @keyframes tech-scroll {
   to {
-    /* Ровно одна копия из пяти (COPIES в TechMarquee.tsx) → бесшовно. */
-    transform: translateX(-20%);
+    /* Ровно одна копия из трёх (COPIES в TechMarquee.tsx) → бесшовно. */
+    transform: translateX(-33.3333%);
   }
 }
 

@@ -49,24 +49,67 @@ export function casePath(slug: string): string {
   return `/case/${slug}`;
 }
 
-/** Технологии для бегущей строки между кейсами и процессом — реальный стек. */
-export const technologies: string[] = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Astro",
-  "Tailwind CSS",
-  "NestJS",
-  "Prisma",
-  "PostgreSQL",
-  "Node.js",
-  "Django",
-  "aiogram",
-  "Celery",
-  "Redis",
-  "Telegram Bot API",
-  "Cloudflare Pages",
-];
+/**
+ * Технологии для ленты в «Навыках» — по строке на дорожку.
+ *
+ * Каждый пункт обязан встречаться в skillGroups ниже: лента — это индекс
+ * сетки навыков, а не отдельное заявление. Ничего нового здесь не заявляем.
+ *
+ * Длина строк — не декоративная величина. Одна копия дорожки должна быть шире
+ * вьюпорта, иначе чип успевает попасть в кадр дважды и лента читается как
+ * короткий зациклённый огрызок. Порог сейчас ~2600px на строку (см. расчёт в
+ * TechMarquee.tsx); убирать пункты — только вместе с пересчётом.
+ */
+export const techRows = {
+  /** Интерфейс и приложение. */
+  top: [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Astro",
+    "Tailwind CSS",
+    "Vite",
+    "TanStack Query",
+    "shadcn/ui",
+    "dnd-kit",
+    "Recharts",
+    "Node.js",
+    "NestJS",
+    "Prisma",
+    "JWT",
+    "Python",
+    "Django",
+    "DRF",
+    "aiogram",
+    "Celery",
+    "ASP.NET Core",
+    "Telegram Bot API",
+  ],
+  /** Данные, инфраструктура, инструменты. */
+  bottom: [
+    "PostgreSQL",
+    "MySQL",
+    "Redis",
+    "Docker Compose",
+    "GitHub Actions",
+    "Nginx",
+    "Cloudflare Pages",
+    "Vercel",
+    "Render",
+    "Neon",
+    "Sentry",
+    "pnpm workspaces",
+    "Git",
+    "Linux",
+    "Bash",
+    "SSH",
+    "Selenium",
+    "Lighthouse",
+    "ESLint",
+    "uv",
+    "ruff",
+  ],
+} as const;
 
 export type Service = {
   title: string;
