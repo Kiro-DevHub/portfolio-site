@@ -29,7 +29,10 @@ export function Skills() {
 
       <TechMarquee className="mt-12 sm:mt-14" />
 
-      <div className="mx-auto mt-14 max-w-[1200px] px-5 sm:mt-16 sm:px-8">
+      {/* Отступ до карточек намеренно вдвое меньше, чем от шапки до ленты
+          (24/32 против 48/56): лента — вход в сетку, а не третий блок секции.
+          При равных отступах секция читалась как два несвязанных куска. */}
+      <div className="mx-auto mt-6 max-w-[1200px] px-5 sm:mt-8 sm:px-8">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {skillGroups.map((group, i) => (
             <Reveal key={group.label} delay={i * 60}>
