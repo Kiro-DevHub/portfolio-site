@@ -1,46 +1,59 @@
 import { technologies } from "@/lib/site";
 
 /**
- * Моушн [7]: бегущая строка технологий между кейсами и процессом. Две копии списка
- * едут влево бесконечно (CSS), пауза на hover. Чистый CSS — без JS. При reduced-motion
- * анимация гасится глобальным reset (строка статична). Вторая копия — aria-hidden.
+ * Лента технологий — визуальный вход в секцию «Навыки»: сначала весь стек
+ * одним взглядом (широта), ниже сетка по направлениям (глубина). Отдельной
+ * секцией не живёт: без «Навыков» рядом она дублировала бы их на расстоянии.
+ *
+ * Две дорожки едут навстречу с разной скоростью, hover по ленте паузит обе.
+ * Чистый CSS, только translateX; при prefers-reduced-motion анимация снята и
+ * дорожки стоят на начале списка (см. globals.css).
  */
-export function TechMarquee() {
-  const Item = ({ label, dup }: { label: string; dup?: boolean }) => (
+
+/** Копий списка в дорожке. Смещение на одну копию = бесшовная петля, а остаток
+ *  (4 копии) должен перекрывать вьюпорт — иначе на широком мониторе за концом
+ *  дорожки появится пустота. 4 × ~880px ≈ 3500px, хватает и на ultrawide. */
+const COPIES = 5;
+
+/** Верхняя дорожка — клиент и приложение, нижняя — данные и инфраструктура.
+ *  Порядок берём из site.ts, чтобы список технологий оставался в одном месте. */
+const rowTop = technologies.slice(0, 8);
+const rowBottom = technologies.slice(8);
+
+function Chip({ label, dup }: { label: string; dup?: boolean }) {
+  return (
     <li
-      className="flex items-center gap-8 whitespace-nowrap px-8"
       aria-hidden={dup || undefined}
+      className="flex shrink-0 items-center gap-2 rounded-sm border border-hair bg-surface px-4 py-2 font-mono text-[13px] leading-none text-fg-dim"
     >
-      <span className="font-mono text-sm text-muted">{label}</span>
-      <span aria-hidden="true" className="text-muted/50">
-        /
-      </span>
+      <span aria-hidden="true" className="size-1 shrink-0 rounded-full bg-accent" />
+      {label}
     </li>
   );
+}
 
+function Row({ items, variant }: { items: string[]; variant: "a" | "b" }) {
   return (
-    <section
-      aria-label="Технологии, с которыми работаю"
-      className="marquee relative overflow-hidden border-t border-hair py-10 sm:py-12"
-    >
-      {/* Мягкие края — растворяем строку у границ секции. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-10"
-        style={{
-          background:
-            "linear-gradient(90deg, var(--color-bg), transparent 8%, transparent 92%, var(--color-bg))",
-        }}
-      />
-      <ul className="marquee-track flex w-max">
-        {technologies.map((t) => (
-          <Item key={t} label={t} />
-        ))}
-        {/* Вторая копия для бесшовной петли */}
-        {technologies.map((t) => (
-          <Item key={`dup-${t}`} label={t} dup />
-        ))}
-      </ul>
-    </section>
+    <ul className={`tech-row tech-row-${variant} flex w-max gap-3`}>
+      {Array.from({ length: COPIES }, (_, copy) =>
+        items.map((label) => (
+          <Chip key={`${copy}-${label}`} label={label} dup={copy > 0} />
+        )),
+      )}
+    </ul>
+  );
+}
+
+export function TechMarquee({ className }: { className?: string }) {
+  return (
+    <div className={`border-y border-hair py-6 sm:py-7 ${className ?? ""}`}>
+      {/* Края растворяем маской, а не цветной подложкой: маска не зависит от
+          фона секции и не добавляет слоя под ленту. Границы band'а лежат на
+          внешней обёртке, поэтому маска их не съедает. */}
+      <div className="tech-strip flex flex-col gap-3 overflow-hidden">
+        <Row items={rowTop} variant="a" />
+        <Row items={rowBottom} variant="b" />
+      </div>
+    </div>
   );
 }

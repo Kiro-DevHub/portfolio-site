@@ -248,17 +248,50 @@ button,
   }
 }
 
-/* ── Marquee технологий: бесшовная петля, пауза на hover ──────────────── */
-.marquee-track {
-  animation: marquee-scroll 34s linear infinite;
+/* ── Лента технологий: две дорожки навстречу, пауза на hover ───────────── */
+/* Мягкие края через маску: не зависит от фона секции и не кладёт под ленту
+   лишний слой. 6% с каждой стороны — чип успевает раствориться целиком. */
+.tech-strip {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
 }
-.marquee:hover .marquee-track {
+/* will-change держим ровно на двух дорожках — это единственные элементы,
+   которые реально едут; на чипах он был бы 75 лишних композитных слоёв. */
+.tech-row {
+  animation-name: tech-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.tech-row-a {
+  animation-duration: 38s;
+}
+/* Нижняя — навстречу и заметно медленнее: одинаковая скорость читалась бы как
+   одна лента, разрезанная пополам. reverse проигрывает те же кадры от -20% к 0,
+   поэтому петля остаётся бесшовной. */
+.tech-row-b {
+  animation-duration: 54s;
+  animation-direction: reverse;
+}
+.tech-strip:hover .tech-row {
   animation-play-state: paused;
 }
-@keyframes marquee-scroll {
+@keyframes tech-scroll {
   to {
-    /* Ровно одна копия списка = половина трека → бесшовно. */
-    transform: translateX(-50%);
+    /* Ровно одна копия из пяти (COPIES в TechMarquee.tsx) → бесшовно. */
+    transform: translateX(-20%);
   }
 }
 
@@ -322,6 +355,14 @@ button,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* Лента — явная остановка, а не «проигралась за 0.01ms»: animation-name: none
+     снимает анимацию целиком (глобальный reset правит только длительность), и
+     дорожки замирают на начале списка. Заодно снимаем ненужный слой. */
+  .tech-row {
+    animation: none;
+    transform: none;
+    will-change: auto;
   }
 }
 
